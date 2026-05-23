@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-05-23T14:30:55.217Z",
+  "lastUpdated": "2026-05-23T14:41:32.427Z",
   "etoro": {
     "displayName": "Juan Puentes Botero",
     "username": "Juanpuentesb",
@@ -18,6 +18,11 @@
     "summary": "3,830 followers / 196 posts"
   },
   "tiktok": {
+    "following": "135",
+    "followers": "1,791",
+    "likes": "9,019",
+    "summary": "135 following / 1,791 followers / 9,019 likes",
+    "sourceNote": "Human-reviewed public TikTok profile stats from the browser.",
     "title": "Juan Puentes on TikTok",
     "isBlocked": false
   },

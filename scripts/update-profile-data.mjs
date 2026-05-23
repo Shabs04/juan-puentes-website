@@ -21,6 +21,13 @@ const FALLBACK = {
     socialProofDetail: "Listed in Juan's Instagram bio at the latest successful refresh.",
     summary: "Education and journey",
   },
+  tiktok: {
+    following: "135",
+    followers: "1,791",
+    likes: "9,019",
+    summary: "135 following / 1,791 followers / 9,019 likes",
+    sourceNote: "Human-reviewed public TikTok profile stats from the browser.",
+  },
 };
 
 const headers = {
@@ -66,6 +73,12 @@ const cleanText = (value = "") =>
     .replace(/[ \t]+/g, " ")
     .replace(/\n{3,}/g, "\n\n")
     .trim();
+
+const formatCount = (value = "") => {
+  const number = Number(String(value).replace(/[^\d]/g, ""));
+  if (!Number.isFinite(number) || number <= 0) return "";
+  return new Intl.NumberFormat("en-US").format(number);
+};
 
 const extractMetaContent = (html, key) => {
   const patterns = [
@@ -141,9 +154,30 @@ const getTikTokData = async () => {
     const html = await response.text();
     const title = extractMetaContent(html, "og:title") || "Juan Puentes on TikTok";
     const isBlocked = /SlardarWAF|Please wait|wafchallenge/i.test(html);
-    return { title, isBlocked };
+    const following =
+      formatCount(html.match(/"followingCount"\s*:\s*(\d+)/)?.[1]) || FALLBACK.tiktok.following;
+    const followers =
+      formatCount(html.match(/"followerCount"\s*:\s*(\d+)/)?.[1]) || FALLBACK.tiktok.followers;
+    const likes =
+      formatCount(html.match(/"heartCount"\s*:\s*(\d+)/)?.[1] || html.match(/"heart"\s*:\s*(\d+)/)?.[1]) ||
+      FALLBACK.tiktok.likes;
+
+    return {
+      ...FALLBACK.tiktok,
+      title,
+      following,
+      followers,
+      likes,
+      summary: `${following} following / ${followers} followers / ${likes} likes`,
+      isBlocked,
+    };
   } catch (error) {
-    return { title: "Juan Puentes on TikTok", isBlocked: true, error: cleanText(error.message) };
+    return {
+      ...FALLBACK.tiktok,
+      title: "Juan Puentes on TikTok",
+      isBlocked: true,
+      error: cleanText(error.message),
+    };
   }
 };
 
