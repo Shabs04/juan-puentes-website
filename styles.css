@@ -722,14 +722,6 @@ h3 {
   font-weight: 750;
 }
 
-.social-metrics {
-  display: block;
-  margin-top: 12px;
-  color: var(--green-deep);
-  font-size: 0.94rem;
-  font-weight: 900;
-}
-
 .disclaimer {
   width: var(--container);
   margin: 0 auto 76px;
