@@ -83,6 +83,7 @@
       riskText:
         "This is an independent profile website concept based on public profile information. It is not financial advice, not an offer to buy or sell financial products, and not an official eToro website. Copy trading and investing involve risk, including possible loss of capital. Past performance does not guarantee future results. Always verify details directly on eToro and consider your own circumstances.",
       footerText: "juanpuentesb.github.io. Public snapshot drafted May 14, 2026.",
+      footerDataText: "Data refreshed",
       footerEtoro: "eToro profile",
       footerInstagram: "Instagram profile",
       footerTiktok: "TikTok profile",
@@ -162,6 +163,7 @@
       riskText:
         "Este es un concepto independiente de sitio web basado en información pública del perfil. No es asesoría financiera, no es una oferta para comprar o vender productos financieros y no es un sitio oficial de eToro. El copy trading y la inversión implican riesgo, incluida la posible pérdida de capital. El rendimiento pasado no garantiza resultados futuros. Verifica siempre los detalles directamente en eToro y considera tus propias circunstancias.",
       footerText: "juanpuentesb.github.io. Perfil público redactado el 14 de mayo de 2026.",
+      footerDataText: "Datos actualizados",
       footerEtoro: "Perfil de eToro",
       footerInstagram: "Perfil de Instagram",
       footerTiktok: "Perfil de TikTok",
