@@ -1,0 +1,50 @@
+name: Publish dev preview
+
+on:
+  push:
+    branches:
+      - dev
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  publish-dev-preview:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out dev branch
+        uses: actions/checkout@v4
+        with:
+          ref: dev
+          path: dev-site
+
+      - name: Check out production branch
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          path: production-site
+
+      - name: Copy dev site into preview folder
+        run: |
+          rm -rf production-site/dev
+          mkdir -p production-site/dev
+          rsync -av --delete \
+            --exclude ".git" \
+            --exclude ".github" \
+            --exclude ".gitignore" \
+            --exclude "*.zip" \
+            dev-site/ production-site/dev/
+
+      - name: Commit preview update
+        working-directory: production-site
+        run: |
+          if [[ -n "$(git status --porcelain dev)" ]]; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add dev
+            git commit -m "Publish dev preview"
+            git push origin HEAD:main
+          else
+            echo "Dev preview is already up to date."
+          fi
