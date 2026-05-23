@@ -1,0 +1,29 @@
+{
+  "lastUpdated": "2026-05-23T14:30:55.217Z",
+  "etoro": {
+    "displayName": "Juan Puentes Botero",
+    "username": "Juanpuentesb",
+    "investingSince": "2019",
+    "copyMinimum": "$200",
+    "avatarUrl": "https://etoro-cdn.etorostatic.com/avatars/original/14513183/3.jpg",
+    "isVerified": true,
+    "isPopularInvestor": true,
+    "strategy": "Long term investor \n ETFs as a solid base \n Modern & forward thinking \n DCA"
+  },
+  "instagram": {
+    "followers": "3,830",
+    "posts": "196",
+    "aumDisplay": "$685k+ AUM",
+    "socialProofDetail": "Updated from Juan's public Instagram profile metadata.",
+    "summary": "3,830 followers / 196 posts"
+  },
+  "tiktok": {
+    "title": "Juan Puentes on TikTok",
+    "isBlocked": false
+  },
+  "sources": {
+    "etoro": "https://www.etoro.com/api/logininfo/v1.1/users/juanpuentesb",
+    "instagram": "https://www.instagram.com/juanpuentesb/",
+    "tiktok": "https://www.tiktok.com/@juanpuentesb"
+  }
+}

@@ -192,6 +192,7 @@
   };
 
   let activeLanguage = getInitialLanguage();
+  let activeProfile = null;
 
   const translate = (key) => translations[activeLanguage][key] || translations.en[key] || "";
 
@@ -230,8 +231,59 @@
     });
 
     syncThemeButton();
+    applyProfileData(activeProfile);
     if (persist) {
       storeValue(languageStorageKey, language);
+    }
+  };
+
+  const setText = (selector, value) => {
+    if (!value) return;
+    document.querySelectorAll(selector).forEach((element) => {
+      element.textContent = value;
+    });
+  };
+
+  const formatDate = (isoDate) => {
+    if (!isoDate) return "";
+    const date = new Date(isoDate);
+    if (Number.isNaN(date.getTime())) return "";
+    return new Intl.DateTimeFormat(activeLanguage === "es" ? "es-AU" : "en-AU", {
+      day: "numeric",
+      month: "short",
+      year: "numeric",
+    }).format(date);
+  };
+
+  function applyProfileData(profile) {
+    if (!profile) return;
+    const etoro = profile.etoro || {};
+    const instagram = profile.instagram || {};
+
+    setText('[data-profile="investingSince"]', etoro.investingSince);
+    setText('[data-profile="copyMinimum"]', etoro.copyMinimum);
+    setText('[data-profile="aumDisplay"]', instagram.aumDisplay);
+    setText('[data-profile="socialProofDetail"]', instagram.socialProofDetail);
+    setText('[data-profile="instagramSummary"]', instagram.summary);
+    setText('[data-profile="lastUpdated"]', formatDate(profile.lastUpdated));
+
+    if (etoro.avatarUrl) {
+      document.querySelectorAll("[data-profile-image='avatar']").forEach((image) => {
+        image.src = etoro.avatarUrl;
+      });
+    }
+  }
+
+  const hydratePublicData = async () => {
+    try {
+      const response = await fetch(`data/profile.json?refresh=${Date.now()}`, {
+        cache: "no-store",
+      });
+      if (!response.ok) return;
+      activeProfile = await response.json();
+      applyProfileData(activeProfile);
+    } catch {
+      // Dev preview keeps hand-written fallback copy if a social platform blocks refresh.
     }
   };
 
@@ -262,4 +314,6 @@
 
   updateHeader();
   window.addEventListener("scroll", updateHeader, { passive: true });
+
+  hydratePublicData();
 })();
