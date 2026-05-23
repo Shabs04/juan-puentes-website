@@ -1,4 +1,4 @@
-name: Update public profile data
+name: Update dev public profile data
 
 on:
   schedule:
@@ -9,28 +9,30 @@ permissions:
   contents: write
 
 jobs:
-  update-profile-data:
+  update-dev-profile-data:
     runs-on: ubuntu-latest
     steps:
-      - name: Check out repository
+      - name: Check out dev branch
         uses: actions/checkout@v4
+        with:
+          ref: dev
 
       - name: Set up Node
         uses: actions/setup-node@v4
         with:
           node-version: "20"
 
-      - name: Refresh public profile data
+      - name: Refresh public profile data on dev
         run: node scripts/update-profile-data.mjs
 
-      - name: Commit refreshed data
+      - name: Commit refreshed dev data
         run: |
           if [[ -n "$(git status --porcelain data/profile.json)" ]]; then
             git config user.name "github-actions[bot]"
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
             git add data/profile.json
-            git commit -m "Update public profile data"
-            git push
+            git commit -m "Update dev public profile data"
+            git push origin HEAD:dev
           else
-            echo "No profile data changes."
+            echo "No dev profile data changes."
           fi
