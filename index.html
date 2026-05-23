@@ -37,7 +37,7 @@
     </script>
   </head>
   <body>
-    <a class="skip-link" href="#main">Skip to content</a>
+    <a class="skip-link" href="#main" data-i18n="skipLink">Skip to content</a>
 
     <header class="site-header" data-elevated="false">
       <div class="header-inner">
@@ -45,20 +45,27 @@
           <span class="brand-mark" aria-hidden="true">JP</span>
           <span>
             <span class="brand-name">Juan Puentes</span>
-            <span class="brand-role">eToro Popular Investor</span>
+            <span class="brand-role" data-i18n="brandRole">eToro Popular Investor</span>
           </span>
         </a>
 
         <nav class="nav-links" aria-label="Primary navigation">
-          <a href="#persona">Persona</a>
-          <a href="#strategy">Strategy</a>
-          <a href="#connect">Connect</a>
+          <a href="#persona" data-i18n="navPersona">Persona</a>
+          <a href="#strategy" data-i18n="navStrategy">Strategy</a>
+          <a href="#connect" data-i18n="navConnect">Connect</a>
         </nav>
 
-        <button class="theme-toggle" type="button" aria-pressed="false" aria-label="Switch to dark theme">
-          <span class="theme-toggle-icon" aria-hidden="true"></span>
-          <span class="theme-toggle-text">Theme</span>
-        </button>
+        <div class="header-actions">
+          <div class="language-toggle" role="group" aria-label="Language">
+            <button class="language-option" type="button" data-language="en" aria-pressed="true">EN</button>
+            <button class="language-option" type="button" data-language="es" aria-pressed="false">ES</button>
+          </div>
+
+          <button class="theme-toggle" type="button" aria-pressed="false" aria-label="Switch to dark theme">
+            <span class="theme-toggle-icon" aria-hidden="true"></span>
+            <span class="theme-toggle-text" data-i18n="themeLabel">Theme</span>
+          </button>
+        </div>
       </div>
     </header>
 
@@ -66,9 +73,9 @@
       <section class="hero" id="top" aria-labelledby="hero-title">
         <div class="hero-inner">
           <div class="hero-copy">
-            <p class="eyebrow">Public investor profile</p>
-            <h1 id="hero-title">Long-term investing, built with discipline.</h1>
-            <p class="hero-lede">
+            <p class="eyebrow" data-i18n="heroEyebrow">Public investor profile</p>
+            <h1 id="hero-title" data-i18n="heroTitle">Long-term investing, built with discipline.</h1>
+            <p class="hero-lede" data-i18n="heroLede">
               Juan Puentes Botero is a Colombian investor living in Australia, sharing a practical
               investing journey centered on stability, innovation, DCA, ETF foundations, and smart
               risk control.
@@ -76,10 +83,10 @@
 
             <nav class="hero-actions" aria-label="Profile links">
               <a class="button button-primary" href="https://www.etoro.com/people/juanpuentesb" target="_blank" rel="noopener noreferrer">
-                View eToro profile
+                <span data-i18n="viewEtoro">View eToro profile</span>
               </a>
               <a class="button button-secondary" href="https://www.instagram.com/juanpuentesb/" target="_blank" rel="noopener noreferrer">
-                Follow on Instagram
+                <span data-i18n="followInstagram">Follow on Instagram</span>
               </a>
             </nav>
           </div>
@@ -98,21 +105,21 @@
               <p class="profile-label">Juan Puentes Botero</p>
               <p class="profile-handle">@Juanpuentesb</p>
               <ul class="verification-row" aria-label="Public profile badges">
-                <li>Verified profile</li>
-                <li>Popular Investor</li>
+                <li data-i18n="verifiedProfile">Verified profile</li>
+                <li data-i18n="popularInvestor">Popular Investor</li>
               </ul>
             </div>
             <dl class="quick-stats">
               <div>
-                <dt>Since</dt>
+                <dt data-i18n="statSince">Since</dt>
                 <dd>2019</dd>
               </div>
               <div>
-                <dt>Base</dt>
+                <dt data-i18n="statBase">Base</dt>
                 <dd>ETFs</dd>
               </div>
               <div>
-                <dt>Copy from</dt>
+                <dt data-i18n="statCopyFrom">Copy from</dt>
                 <dd>$200</dd>
               </div>
             </dl>
@@ -123,33 +130,33 @@
       <section class="snapshot-band" aria-label="Public profile snapshot">
         <div class="snapshot-grid">
           <article>
-            <span class="stat-kicker">Origin</span>
-            <strong>Colombia to Australia</strong>
-            <p>A cross-border investor voice with content for everyday people learning to invest.</p>
+            <span class="stat-kicker" data-i18n="snapshotOrigin">Origin</span>
+            <strong data-i18n="snapshotOriginTitle">Colombia to Australia</strong>
+            <p data-i18n="snapshotOriginText">A cross-border investor voice with content for everyday people learning to invest.</p>
           </article>
           <article>
-            <span class="stat-kicker">Public focus</span>
-            <strong>Long-term growth</strong>
-            <p>Stability, innovation, risk control, and avoiding emotional decision making.</p>
+            <span class="stat-kicker" data-i18n="snapshotFocus">Public focus</span>
+            <strong data-i18n="snapshotFocusTitle">Long-term growth</strong>
+            <p data-i18n="snapshotFocusText">Stability, innovation, risk control, and avoiding emotional decision making.</p>
           </article>
           <article>
-            <span class="stat-kicker">Social proof</span>
+            <span class="stat-kicker" data-i18n="snapshotProof">Social proof</span>
             <strong>$685k+ AUM</strong>
-            <p>Listed in Juan's Instagram bio at the time this site was drafted.</p>
+            <p data-i18n="snapshotProofText">Listed in Juan's Instagram bio at the time this site was drafted.</p>
           </article>
           <article>
-            <span class="stat-kicker">Style</span>
-            <strong>Modern DCA</strong>
-            <p>A repeatable accumulation mindset rather than short-term market noise.</p>
+            <span class="stat-kicker" data-i18n="snapshotStyle">Style</span>
+            <strong data-i18n="snapshotStyleTitle">Modern DCA</strong>
+            <p data-i18n="snapshotStyleText">A repeatable accumulation mindset rather than short-term market noise.</p>
           </article>
         </div>
       </section>
 
       <section class="section" id="persona" aria-labelledby="persona-title">
         <div class="section-header">
-          <p class="eyebrow">Investor persona</p>
-          <h2 id="persona-title">Calm, direct, and built for people who want the long game.</h2>
-          <p>
+          <p class="eyebrow" data-i18n="personaEyebrow">Investor persona</p>
+          <h2 id="persona-title" data-i18n="personaTitle">Calm, direct, and built for people who want the long game.</h2>
+          <p data-i18n="personaIntro">
             The tone is simple: investing is not gambling. The persona should feel approachable,
             bilingual, grounded, and confident without promising outcomes.
           </p>
@@ -158,24 +165,24 @@
         <div class="persona-layout">
           <article class="persona-card">
             <span class="card-number">01</span>
-            <h3>Everyday clarity</h3>
-            <p>
+            <h3 data-i18n="personaCardOneTitle">Everyday clarity</h3>
+            <p data-i18n="personaCardOneText">
               Speaks to people who are learning to invest like normal people, using plain language
               and practical decision rules.
             </p>
           </article>
           <article class="persona-card">
             <span class="card-number">02</span>
-            <h3>Discipline over hype</h3>
-            <p>
+            <h3 data-i18n="personaCardTwoTitle">Discipline over hype</h3>
+            <p data-i18n="personaCardTwoText">
               Positions patience, process, and emotional control as the edge, especially when markets
               get noisy.
             </p>
           </article>
           <article class="persona-card">
             <span class="card-number">03</span>
-            <h3>Future-facing</h3>
-            <p>
+            <h3 data-i18n="personaCardThreeTitle">Future-facing</h3>
+            <p data-i18n="personaCardThreeText">
               Combines broad ETF exposure with selective innovative assets, keeping the message modern
               but still measured.
             </p>
@@ -185,46 +192,46 @@
 
       <section class="section strategy-section" id="strategy" aria-labelledby="strategy-title">
         <div class="section-header compact">
-          <p class="eyebrow">Strategy architecture</p>
-          <h2 id="strategy-title">A balanced framework for public communication.</h2>
+          <p class="eyebrow" data-i18n="strategyEyebrow">Strategy architecture</p>
+          <h2 id="strategy-title" data-i18n="strategyTitle">A balanced framework for public communication.</h2>
         </div>
 
         <div class="strategy-layout">
           <div class="strategy-visual" role="img" aria-label="Investment framework with ETF core, innovation satellite, DCA rhythm, and risk review">
             <div class="allocation-row">
-              <span>ETF core</span>
+              <span data-i18n="allocationEtf">ETF core</span>
               <span class="allocation-bar allocation-bar-long"></span>
             </div>
             <div class="allocation-row">
-              <span>Innovation</span>
+              <span data-i18n="allocationInnovation">Innovation</span>
               <span class="allocation-bar allocation-bar-medium"></span>
             </div>
             <div class="allocation-row">
-              <span>DCA rhythm</span>
+              <span data-i18n="allocationDca">DCA rhythm</span>
               <span class="allocation-bar allocation-bar-steady"></span>
             </div>
             <div class="allocation-row">
-              <span>Risk review</span>
+              <span data-i18n="allocationRisk">Risk review</span>
               <span class="allocation-bar allocation-bar-short"></span>
             </div>
           </div>
 
           <div class="strategy-list">
             <article>
-              <h3>Foundation first</h3>
-              <p>Use world-class ETFs as the steady base of the story.</p>
+              <h3 data-i18n="strategyCardOneTitle">Foundation first</h3>
+              <p data-i18n="strategyCardOneText">Use world-class ETFs as the steady base of the story.</p>
             </article>
             <article>
-              <h3>Innovation with boundaries</h3>
-              <p>Highlight forward-looking assets while keeping the risk language visible.</p>
+              <h3 data-i18n="strategyCardTwoTitle">Innovation with boundaries</h3>
+              <p data-i18n="strategyCardTwoText">Highlight forward-looking assets while keeping the risk language visible.</p>
             </article>
             <article>
-              <h3>DCA and patience</h3>
-              <p>Make consistency the signature behavior, not market timing.</p>
+              <h3 data-i18n="strategyCardThreeTitle">DCA and patience</h3>
+              <p data-i18n="strategyCardThreeText">Make consistency the signature behavior, not market timing.</p>
             </article>
             <article>
-              <h3>Transparent risk</h3>
-              <p>Keep copy trading framed as a decision that needs personal research.</p>
+              <h3 data-i18n="strategyCardFourTitle">Transparent risk</h3>
+              <p data-i18n="strategyCardFourText">Keep copy trading framed as a decision that needs personal research.</p>
             </article>
           </div>
         </div>
@@ -232,10 +239,10 @@
 
       <section class="quote-band" aria-labelledby="message-title">
         <div>
-          <p class="eyebrow">Message platform</p>
-          <h2 id="message-title">"We are investing, not gambling."</h2>
+          <p class="eyebrow" data-i18n="quoteEyebrow">Message platform</p>
+          <h2 id="message-title">"Para Tener Cosas Que Nunca Has Tenido Tienes Que Hacer Cosas Que Nunca Has Hecho"</h2>
         </div>
-        <p>
+        <p data-i18n="quoteText">
           A premium site for Juan should sound measured: long-term, educational, transparent, and
           community-minded. The content should invite people to connect, learn, and verify the data
           directly on the platforms where he publishes.
@@ -244,9 +251,9 @@
 
       <section class="section" id="connect" aria-labelledby="connect-title">
         <div class="section-header">
-          <p class="eyebrow">Connect</p>
-          <h2 id="connect-title">One identity across eToro, Instagram, and TikTok.</h2>
-          <p>
+          <p class="eyebrow" data-i18n="connectEyebrow">Connect</p>
+          <h2 id="connect-title" data-i18n="connectTitle">One identity across eToro, Instagram, and TikTok.</h2>
+          <p data-i18n="connectIntro">
             Each link opens the public profile directly. The eToro page should remain the source of
             truth for investment performance and copy-trading decisions.
           </p>
@@ -256,24 +263,24 @@
           <a class="social-card" href="https://www.etoro.com/people/juanpuentesb" target="_blank" rel="noopener noreferrer">
             <span class="social-name">eToro</span>
             <strong>@Juanpuentesb</strong>
-            <span class="social-action">Profile, portfolio, stats</span>
+            <span class="social-action" data-i18n="socialEtoro">Profile, portfolio, stats</span>
           </a>
           <a class="social-card" href="https://www.instagram.com/juanpuentesb/" target="_blank" rel="noopener noreferrer">
             <span class="social-name">Instagram</span>
             <strong>@juanpuentesb</strong>
-            <span class="social-action">Education and journey</span>
+            <span class="social-action" data-i18n="socialInstagram">Education and journey</span>
           </a>
           <a class="social-card" href="https://www.tiktok.com/@juanpuentesb" target="_blank" rel="noopener noreferrer">
             <span class="social-name">TikTok</span>
             <strong>@juanpuentesb</strong>
-            <span class="social-action">Short-form insights</span>
+            <span class="social-action" data-i18n="socialTiktok">Short-form insights</span>
           </a>
         </div>
       </section>
 
       <section class="disclaimer" aria-labelledby="risk-title">
-        <h2 id="risk-title">Risk note</h2>
-        <p>
+        <h2 id="risk-title" data-i18n="riskTitle">Risk note</h2>
+        <p data-i18n="riskText">
           This is an independent profile website concept based on public profile information. It is
           not financial advice, not an offer to buy or sell financial products, and not an official
           eToro website. Copy trading and investing involve risk, including possible loss of capital.
@@ -284,11 +291,11 @@
     </main>
 
     <footer class="site-footer">
-      <p>juanpuentesb.github.io. Public snapshot drafted May 14, 2026.</p>
+      <p data-i18n="footerText">juanpuentesb.github.io. Public snapshot drafted May 14, 2026.</p>
       <ul aria-label="Source links">
-        <li><a href="https://www.etoro.com/people/juanpuentesb" target="_blank" rel="noopener noreferrer">eToro profile</a></li>
-        <li><a href="https://www.instagram.com/juanpuentesb/" target="_blank" rel="noopener noreferrer">Instagram profile</a></li>
-        <li><a href="https://www.tiktok.com/@juanpuentesb" target="_blank" rel="noopener noreferrer">TikTok profile</a></li>
+        <li><a href="https://www.etoro.com/people/juanpuentesb" target="_blank" rel="noopener noreferrer" data-i18n="footerEtoro">eToro profile</a></li>
+        <li><a href="https://www.instagram.com/juanpuentesb/" target="_blank" rel="noopener noreferrer" data-i18n="footerInstagram">Instagram profile</a></li>
+        <li><a href="https://www.tiktok.com/@juanpuentesb" target="_blank" rel="noopener noreferrer" data-i18n="footerTiktok">TikTok profile</a></li>
       </ul>
     </footer>
   </body>
