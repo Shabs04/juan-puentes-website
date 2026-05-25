@@ -37,6 +37,7 @@
       navStrategy: "Strategy",
       navConnect: "Connect",
       navBook: "Book time",
+      navStartEtoro: "Start on eToro",
       heroEyebrow: "Public investor profile",
       heroTitle: "Long-term investing, built with discipline.",
       heroLede:
@@ -46,6 +47,7 @@
       followTiktok: "Follow on TikTok",
       verifiedProfile: "Verified profile",
       popularInvestor: "Popular Investor",
+      profileStartInvesting: "Start investing with Juan",
       statSince: "Since",
       statBase: "Base",
       statCopyFrom: "Copy from",
@@ -156,6 +158,7 @@
       navStrategy: "Estrategia",
       navConnect: "Conectar",
       navBook: "Reservar",
+      navStartEtoro: "Empezar en eToro",
       heroEyebrow: "Perfil público de inversionista",
       heroTitle: "Inversión a largo plazo, construida con disciplina.",
       heroLede:
@@ -165,6 +168,7 @@
       followTiktok: "Seguir en TikTok",
       verifiedProfile: "Perfil verificado",
       popularInvestor: "Inversionista Popular",
+      profileStartInvesting: "Empezar a invertir con Juan",
       statSince: "Desde",
       statBase: "Base",
       statCopyFrom: "Copiar desde",
