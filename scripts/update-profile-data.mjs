@@ -1,4 +1,4 @@
-import { mkdir, writeFile } from "node:fs/promises";
+import { mkdir, readFile, writeFile } from "node:fs/promises";
 
 const ETORO_PROFILE_API = "https://www.etoro.com/api/logininfo/v1.1/users/juanpuentesb";
 const INSTAGRAM_PROFILE = "https://www.instagram.com/juanpuentesb/";
@@ -10,9 +10,13 @@ const FALLBACK = {
     username: "Juanpuentesb",
     investingSince: "2019",
     copyMinimum: "$200",
-    avatarUrl: "https://etoro-cdn.etorostatic.com/avatars/original/14513183/3.jpg",
+    avatarUrl: "https://etoro-cdn.etorostatic.com/avatars/original/14513183/5.jpg",
     isVerified: true,
     isPopularInvestor: true,
+    shortBio: "Long term investor\nETFs as a solid base\nModern & forward thinking\nDCA",
+    fullBio:
+      "Colombian living in Australia\nInvesting since 2019.\n\nWe are investing, not gambling.\n\nStrategy: Stability + innovation / Long term growth / Smart risk control.\n\nI focus on a proven strategy, investing in world class ETFs and top innovating assets, avoiding emotional decisions and costly mistakes.\n\nMinimum copy amount $200\n\nHappy to connect with you over the feed or instagram.",
+    bioLanguage: "en",
     strategy: "Long-term investor, ETF base, modern forward-thinking, DCA.",
   },
   instagram: {
@@ -28,6 +32,21 @@ const FALLBACK = {
     summary: "135 following / 1,791 followers / 9,019 likes",
     sourceNote: "Human-reviewed public TikTok profile stats from the browser.",
   },
+};
+
+const readExistingData = async () => {
+  try {
+    return JSON.parse(await readFile("data/profile.json", "utf8"));
+  } catch {
+    return {};
+  }
+};
+
+const existingData = await readExistingData();
+const BASELINE = {
+  etoro: { ...FALLBACK.etoro, ...(existingData.etoro || {}) },
+  instagram: { ...FALLBACK.instagram, ...(existingData.instagram || {}) },
+  tiktok: { ...FALLBACK.tiktok, ...(existingData.tiktok || {}) },
 };
 
 const headers = {
@@ -65,6 +84,15 @@ const decodeHtml = (value = "") =>
     .replace(/&#x([0-9a-f]+);/gi, (_, code) => String.fromCodePoint(Number.parseInt(code, 16)))
     .replace(/&#([0-9]+);/g, (_, code) => String.fromCodePoint(Number.parseInt(code, 10)));
 
+const cleanSourceText = (value = "") =>
+  decodeHtml(String(value))
+    .normalize("NFC")
+    .replace(/\r\n?/g, "\n")
+    .replace(/[ \t]+/g, " ")
+    .replace(/[ \t]*\n[ \t]*/g, "\n")
+    .replace(/\n{3,}/g, "\n\n")
+    .trim();
+
 const cleanText = (value = "") =>
   decodeHtml(String(value))
     .normalize("NFKD")
@@ -99,27 +127,34 @@ const getEtoroData = async () => {
       headers: { accept: "application/json" },
     });
     const profile = await response.json();
-    const about = cleanText(profile.aboutMe || profile.userBio?.aboutMe || "");
-    const aboutShort = cleanText(profile.aboutMeShort || profile.userBio?.aboutMeShort || "");
-    const investingSince = about.match(/investing since\s+(\d{4})/i)?.[1] || FALLBACK.etoro.investingSince;
-    const copyAmount = about.match(/minimum copy amount\s*\$?\s*([\d,]+)/i)?.[1];
+    const about = cleanSourceText(profile.aboutMe || profile.userBio?.aboutMe || "");
+    const aboutShort = cleanSourceText(profile.aboutMeShort || profile.userBio?.aboutMeShort || "");
+    const searchableAbout = cleanText(about);
+    const investingSince = searchableAbout.match(/investing since\s+(\d{4})/i)?.[1] || BASELINE.etoro.investingSince;
+    const copyAmount = searchableAbout.match(/minimum copy amount\s*\$?\s*([\d,]+)/i)?.[1];
     const avatarUrl =
       profile.avatars?.find((avatar) => avatar.type === "Original")?.url ||
       profile.avatars?.[0]?.url ||
-      FALLBACK.etoro.avatarUrl;
+      BASELINE.etoro.avatarUrl;
+    const bioLanguage = cleanText(profile.userBio?.languageCode || profile.languageIsoCode || BASELINE.etoro.bioLanguage)
+      .split("-")[0]
+      .toLowerCase();
 
     return {
       displayName: cleanText(`${profile.firstName || "Juan"} ${profile.lastName || "Puentes Botero"}`),
-      username: cleanText(profile.username || FALLBACK.etoro.username),
+      username: cleanText(profile.username || BASELINE.etoro.username),
       investingSince,
-      copyMinimum: copyAmount ? `$${copyAmount}` : FALLBACK.etoro.copyMinimum,
+      copyMinimum: copyAmount ? `$${copyAmount}` : BASELINE.etoro.copyMinimum,
       avatarUrl,
       isVerified: Boolean(profile.isVerified),
       isPopularInvestor: Boolean(profile.isPi),
-      strategy: aboutShort || FALLBACK.etoro.strategy,
+      shortBio: aboutShort || BASELINE.etoro.shortBio,
+      fullBio: about || BASELINE.etoro.fullBio,
+      bioLanguage: bioLanguage || BASELINE.etoro.bioLanguage,
+      strategy: aboutShort || BASELINE.etoro.strategy,
     };
   } catch (error) {
-    return { ...FALLBACK.etoro, error: cleanText(error.message) };
+    return { ...BASELINE.etoro, error: cleanText(error.message) };
   }
 };
 
@@ -131,7 +166,7 @@ const getInstagramData = async () => {
     const followers = description.match(/([\d,.]+)\s+Followers/i)?.[1] || "";
     const posts = description.match(/([\d,.]+)\s+Posts/i)?.[1] || "";
     const aum = description.match(/\+\$([\d,.]+)\s*([km])?\s*AUM/i);
-    const aumDisplay = aum ? `$${aum[1]}${aum[2] || ""}+ AUM` : FALLBACK.instagram.aumDisplay;
+    const aumDisplay = aum ? `$${aum[1]}${aum[2] || ""}+ AUM` : BASELINE.instagram.aumDisplay;
     const summaryParts = [];
     if (followers) summaryParts.push(`${followers} followers`);
     if (posts) summaryParts.push(`${posts} posts`);
@@ -141,10 +176,10 @@ const getInstagramData = async () => {
       posts,
       aumDisplay,
       socialProofDetail: "Updated from Juan's public Instagram profile metadata.",
-      summary: summaryParts.length ? summaryParts.join(" / ") : FALLBACK.instagram.summary,
+      summary: summaryParts.length ? summaryParts.join(" / ") : BASELINE.instagram.summary,
     };
   } catch (error) {
-    return { ...FALLBACK.instagram, error: cleanText(error.message) };
+    return { ...BASELINE.instagram, error: cleanText(error.message) };
   }
 };
 
@@ -155,26 +190,30 @@ const getTikTokData = async () => {
     const title = extractMetaContent(html, "og:title") || "Juan Puentes on TikTok";
     const isBlocked = /SlardarWAF|Please wait|wafchallenge/i.test(html);
     const following =
-      formatCount(html.match(/"followingCount"\s*:\s*(\d+)/)?.[1]) || FALLBACK.tiktok.following;
+      formatCount(html.match(/"followingCount"\s*:\s*(\d+)/)?.[1]) || BASELINE.tiktok.following;
     const followers =
-      formatCount(html.match(/"followerCount"\s*:\s*(\d+)/)?.[1]) || FALLBACK.tiktok.followers;
+      formatCount(html.match(/"followerCount"\s*:\s*(\d+)/)?.[1]) || BASELINE.tiktok.followers;
     const likes =
       formatCount(html.match(/"heartCount"\s*:\s*(\d+)/)?.[1] || html.match(/"heart"\s*:\s*(\d+)/)?.[1]) ||
-      FALLBACK.tiktok.likes;
+      BASELINE.tiktok.likes;
 
     return {
-      ...FALLBACK.tiktok,
+      ...BASELINE.tiktok,
       title,
       following,
       followers,
       likes,
       summary: `${following} following / ${followers} followers / ${likes} likes`,
+      sourceNote: isBlocked
+        ? "Automated TikTok refresh was blocked; retaining last known public stats."
+        : "Updated from Juan's public TikTok profile page.",
       isBlocked,
     };
   } catch (error) {
     return {
-      ...FALLBACK.tiktok,
+      ...BASELINE.tiktok,
       title: "Juan Puentes on TikTok",
+      sourceNote: "Automated TikTok refresh was blocked; retaining last known public stats.",
       isBlocked: true,
       error: cleanText(error.message),
     };
