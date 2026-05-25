@@ -13,6 +13,7 @@
   const bookingPlaceholder = document.querySelector("[data-booking-placeholder]");
   const calendarGrid = document.querySelector("[data-calendar-grid]");
   const weekLabel = document.querySelector("[data-week-label]");
+  const weekRelativeLabel = document.querySelector("[data-week-relative]");
   const timezoneLabel = document.querySelector("[data-timezone-label]");
   const selectedSlotText = document.querySelector("[data-selected-slot]");
   const googleEventLink = document.querySelector("[data-google-event-link]");
@@ -114,6 +115,11 @@
       bookingCalendarEyebrow: "Calendar",
       bookingCalendarTitle: "Choose a preferred meeting window.",
       bookingThisWeek: "This week",
+      bookingRelativeThisWeek: "This week",
+      bookingRelativeNextWeek: "Next week",
+      bookingRelativeInWeeks: "In {count} weeks",
+      bookingRelativePreviousWeek: "Previous week",
+      bookingRelativeWeeksAgo: "{count} weeks ago",
       bookingWorkWeek: "Work week",
       bookingCalendarReady: "Google / iOS ready",
       bookingTimeZone: "Time zone",
@@ -228,6 +234,11 @@
       bookingCalendarEyebrow: "Calendario",
       bookingCalendarTitle: "Elige una ventana de reuni\u00f3n preferida.",
       bookingThisWeek: "Esta semana",
+      bookingRelativeThisWeek: "Esta semana",
+      bookingRelativeNextWeek: "Pr\u00f3xima semana",
+      bookingRelativeInWeeks: "En {count} semanas",
+      bookingRelativePreviousWeek: "Semana anterior",
+      bookingRelativeWeeksAgo: "Hace {count} semanas",
       bookingWorkWeek: "Semana laboral",
       bookingCalendarReady: "Listo para Google / iOS",
       bookingTimeZone: "Zona horaria",
@@ -342,6 +353,19 @@
       : `${visibleWeekStart.getDate()} ${startMonth}-${weekEnd.getDate()} ${endMonth}, ${year}`;
   };
 
+  const formatRelativeWeek = () => {
+    const currentWeekStart = getWeekStart(new Date());
+    const weekDifference = Math.round((visibleWeekStart - currentWeekStart) / (7 * 24 * 60 * 60 * 1000));
+
+    if (weekDifference === 0) return translate("bookingRelativeThisWeek");
+    if (weekDifference === 1) return translate("bookingRelativeNextWeek");
+    if (weekDifference > 1) {
+      return translate("bookingRelativeInWeeks").replace("{count}", String(weekDifference));
+    }
+    if (weekDifference === -1) return translate("bookingRelativePreviousWeek");
+    return translate("bookingRelativeWeeksAgo").replace("{count}", String(Math.abs(weekDifference)));
+  };
+
   const formatDayName = (date) =>
     new Intl.DateTimeFormat(activeLanguage === "es" ? "es-AU" : "en-AU", { weekday: "short" }).format(date);
 
@@ -439,6 +463,9 @@
 
     if (weekLabel) {
       weekLabel.textContent = formatWeekRange();
+    }
+    if (weekRelativeLabel) {
+      weekRelativeLabel.textContent = formatRelativeWeek();
     }
     if (timezoneLabel) {
       timezoneLabel.textContent = userTimeZone;

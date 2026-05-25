@@ -603,11 +603,24 @@ h3 {
   color: var(--muted);
 }
 
-.calendar-range {
+.calendar-range-wrap {
   flex: 1;
+  display: grid;
+  justify-items: center;
+  min-width: fit-content;
+}
+
+.calendar-range {
   min-width: fit-content;
   font-size: 1rem;
   text-align: center;
+}
+
+.calendar-relative {
+  color: var(--green-deep);
+  font-size: 0.76rem;
+  font-weight: 950;
+  text-transform: uppercase;
 }
 
 .calendar-meta {
@@ -1144,8 +1157,8 @@ h3 {
     flex-direction: column;
   }
 
-  .calendar-range {
-    text-align: left;
+  .calendar-range-wrap {
+    justify-items: start;
   }
 
   .section-header p {
