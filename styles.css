@@ -569,7 +569,7 @@ h3 {
 }
 
 .calendar-icon-button,
-.calendar-today,
+.calendar-current-week,
 .calendar-pill {
   min-height: 36px;
   border: 1px solid var(--line);
@@ -581,7 +581,7 @@ h3 {
 }
 
 .calendar-icon-button,
-.calendar-today {
+.calendar-current-week {
   cursor: pointer;
 }
 
@@ -592,7 +592,7 @@ h3 {
   line-height: 1;
 }
 
-.calendar-today,
+.calendar-current-week,
 .calendar-pill {
   padding: 0 10px;
 }
