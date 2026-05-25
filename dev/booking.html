@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="light dark">
+    <meta name="description" content="Book a Google Meet with Juan Puentes Botero through his public calendar booking page.">
+    <meta name="theme-color" content="#f7fff5">
+    <meta property="og:title" content="Book Time With Juan Puentes">
+    <meta property="og:description" content="Select an available Google Meet time with Juan Puentes Botero.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://juanpuentesb.github.io/booking.html">
+    <meta property="og:image" content="https://etoro-cdn.etorostatic.com/avatars/original/14513183/3.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Book Time With Juan Puentes">
+    <meta name="twitter:description" content="Select an available Google Meet time with Juan Puentes Botero.">
+    <meta name="twitter:image" content="https://etoro-cdn.etorostatic.com/avatars/original/14513183/3.jpg">
+    <title>Book Time With Juan Puentes</title>
+    <link rel="canonical" href="https://juanpuentesb.github.io/booking.html">
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="styles.css">
+    <script defer src="script.js"></script>
+  </head>
+  <body data-page="booking">
+    <a class="skip-link" href="#main" data-i18n="skipLink">Skip to content</a>
+
+    <header class="site-header" data-elevated="false">
+      <div class="header-inner">
+        <a class="brand" href="index.html#top" aria-label="Juan Puentes Botero home">
+          <span class="brand-mark" aria-hidden="true">JP</span>
+          <span>
+            <span class="brand-name">Juan Puentes</span>
+            <span class="brand-role" data-i18n="brandRole">eToro Popular Investor</span>
+          </span>
+        </a>
+
+        <nav class="nav-links" aria-label="Primary navigation">
+          <a href="index.html#persona" data-i18n="navPersona">Persona</a>
+          <a href="index.html#strategy" data-i18n="navStrategy">Strategy</a>
+          <a href="index.html#connect" data-i18n="navConnect">Connect</a>
+          <a href="booking.html" aria-current="page" data-i18n="navBook">Book time</a>
+        </nav>
+
+        <div class="header-actions">
+          <div class="language-toggle" role="group" aria-label="Language">
+            <button class="language-option" type="button" data-language="en" aria-pressed="true">EN</button>
+            <button class="language-option" type="button" data-language="es" aria-pressed="false">ES</button>
+          </div>
+
+          <button class="theme-toggle" type="button" aria-pressed="false" aria-label="Switch to dark theme">
+            <span class="theme-toggle-icon" aria-hidden="true"></span>
+            <span class="theme-toggle-text" data-i18n="themeLabel">Theme</span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main id="main">
+      <section class="booking-hero" aria-labelledby="booking-title">
+        <div class="booking-hero-inner">
+          <div class="booking-copy">
+            <p class="eyebrow" data-i18n="bookingEyebrow">Book time</p>
+            <h1 id="booking-title" data-i18n="bookingTitle">Book a Google Meet with Juan.</h1>
+            <p class="hero-lede" data-i18n="bookingLede">
+              Choose an available time from Juan's calendar. The booking flow handles time zones
+              and sends the Google Meet details after the appointment is confirmed.
+            </p>
+            <nav class="hero-actions" aria-label="Booking actions">
+              <a
+                class="button button-primary"
+                href="#booking-calendar"
+                data-booking-link
+                data-booking-url=""
+                data-i18n="bookingPendingButton"
+              >Calendar link pending</a>
+              <a class="button button-secondary" href="index.html" data-i18n="bookingBackHome">Back to home</a>
+            </nav>
+          </div>
+
+          <aside class="booking-summary" aria-label="Booking summary">
+            <p class="profile-label" data-i18n="bookingCardTitle">Google Meet appointment</p>
+            <dl class="booking-facts">
+              <div>
+                <dt data-i18n="bookingFactFormat">Format</dt>
+                <dd data-i18n="bookingFactFormatValue">Google Meet</dd>
+              </div>
+              <div>
+                <dt data-i18n="bookingFactAvailability">Availability</dt>
+                <dd data-i18n="bookingFactAvailabilityValue">Calendar-based</dd>
+              </div>
+              <div>
+                <dt data-i18n="bookingFactTimezone">Time zone</dt>
+                <dd data-i18n="bookingFactTimezoneValue">Shown locally</dd>
+              </div>
+            </dl>
+          </aside>
+        </div>
+      </section>
+
+      <section class="booking-section" id="booking-calendar" aria-labelledby="booking-calendar-title">
+        <div class="section-header compact">
+          <p class="eyebrow" data-i18n="bookingCalendarEyebrow">Calendar</p>
+          <h2 id="booking-calendar-title" data-i18n="bookingCalendarTitle">Select a time that works.</h2>
+        </div>
+
+        <div class="booking-widget">
+          <iframe
+            class="booking-frame"
+            data-booking-frame
+            title="Google Calendar appointment schedule"
+            hidden
+          ></iframe>
+          <div class="booking-placeholder" data-booking-placeholder>
+            <strong data-i18n="bookingPlaceholderTitle">Google Calendar booking link needed</strong>
+            <p data-i18n="bookingPlaceholderText">
+              Add Juan's Google Calendar appointment schedule link here, and this page will show the
+              live booking calendar.
+            </p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p>
+        <span data-i18n="footerText">juanpuentesb.github.io. Public snapshot drafted May 14, 2026.</span>
+        <span data-i18n="footerDataText">Data refreshed</span>
+        <span data-profile="lastUpdated">May 2026</span>.
+      </p>
+      <ul aria-label="Source links">
+        <li><a href="https://www.etoro.com/people/juanpuentesb" target="_blank" rel="noopener noreferrer" data-i18n="footerEtoro">eToro profile</a></li>
+        <li><a href="https://www.instagram.com/juanpuentesb/" target="_blank" rel="noopener noreferrer" data-i18n="footerInstagram">Instagram profile</a></li>
+        <li><a href="https://www.tiktok.com/@juanpuentesb" target="_blank" rel="noopener noreferrer" data-i18n="footerTiktok">TikTok profile</a></li>
+      </ul>
+    </footer>
+  </body>
+</html>

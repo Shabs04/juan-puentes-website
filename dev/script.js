@@ -6,10 +6,19 @@
   const themeMeta = document.querySelector('meta[name="theme-color"]');
   const themeStorageKey = "juan-puentes-theme";
   const languageStorageKey = "juan-puentes-language";
+  const pageName = document.body.dataset.page || "home";
+  const bookingLink = document.querySelector("[data-booking-link]");
+  const bookingFrame = document.querySelector("[data-booking-frame]");
+  const bookingPlaceholder = document.querySelector("[data-booking-placeholder]");
+  const bookingUrl = bookingLink?.dataset.bookingUrl?.trim() || "";
+  const hasBookingUrl =
+    /^https:\/\/(calendar\.google\.com\/calendar\/(?:u\/\d+\/)?appointments\/|calendar\.app\.google\/)/i.test(bookingUrl) &&
+    !bookingUrl.toLowerCase().includes("replace");
 
   const translations = {
     en: {
       pageTitle: "Juan Puentes | Long-Term Investor",
+      bookingPageTitle: "Book Time With Juan Puentes",
       themeLabel: "Theme",
       themeToDark: "Switch to dark theme",
       themeToLight: "Switch to light theme",
@@ -18,6 +27,7 @@
       navPersona: "Persona",
       navStrategy: "Strategy",
       navConnect: "Connect",
+      navBook: "Book time",
       heroEyebrow: "Public investor profile",
       heroTitle: "Long-term investing, built with discipline.",
       heroLede:
@@ -79,6 +89,25 @@
       socialInstagram: "Education and journey",
       socialTiktok: "Short-form insights",
       tiktokManualNote: "Reviewed public TikTok profile stats",
+      bookingEyebrow: "Book time",
+      bookingTitle: "Book a Google Meet with Juan.",
+      bookingLede:
+        "Choose an available time from Juan's calendar. The booking flow handles time zones and sends the Google Meet details after the appointment is confirmed.",
+      bookingPendingButton: "Calendar link pending",
+      bookingOpen: "Open booking calendar",
+      bookingBackHome: "Back to home",
+      bookingCardTitle: "Google Meet appointment",
+      bookingFactFormat: "Format",
+      bookingFactFormatValue: "Google Meet",
+      bookingFactAvailability: "Availability",
+      bookingFactAvailabilityValue: "Calendar-based",
+      bookingFactTimezone: "Time zone",
+      bookingFactTimezoneValue: "Shown locally",
+      bookingCalendarEyebrow: "Calendar",
+      bookingCalendarTitle: "Select a time that works.",
+      bookingPlaceholderTitle: "Google Calendar booking link needed",
+      bookingPlaceholderText:
+        "Add Juan's Google Calendar appointment schedule link here, and this page will show the live booking calendar.",
       riskTitle: "Risk note",
       riskText:
         "This is an independent profile website concept based on public profile information. It is not financial advice, not an offer to buy or sell financial products, and not an official eToro website. Copy trading and investing involve risk, including possible loss of capital. Past performance does not guarantee future results. Always verify details directly on eToro and consider your own circumstances.",
@@ -90,6 +119,7 @@
     },
     es: {
       pageTitle: "Juan Puentes | Inversionista a Largo Plazo",
+      bookingPageTitle: "Reservar Tiempo Con Juan Puentes",
       themeLabel: "Tema",
       themeToDark: "Cambiar a tema oscuro",
       themeToLight: "Cambiar a tema claro",
@@ -98,6 +128,7 @@
       navPersona: "Persona",
       navStrategy: "Estrategia",
       navConnect: "Conectar",
+      navBook: "Reservar",
       heroEyebrow: "Perfil público de inversionista",
       heroTitle: "Inversión a largo plazo, construida con disciplina.",
       heroLede:
@@ -159,6 +190,25 @@
       socialInstagram: "Educación y camino",
       socialTiktok: "Ideas en formato corto",
       tiktokManualNote: "Estadísticas públicas revisadas de TikTok",
+      bookingEyebrow: "Reservar",
+      bookingTitle: "Reserva un Google Meet con Juan.",
+      bookingLede:
+        "Elige un horario disponible en el calendario de Juan. El flujo de reserva maneja zonas horarias y env\u00eda los detalles de Google Meet cuando se confirma la cita.",
+      bookingPendingButton: "Enlace de calendario pendiente",
+      bookingOpen: "Abrir calendario de reservas",
+      bookingBackHome: "Volver al inicio",
+      bookingCardTitle: "Cita por Google Meet",
+      bookingFactFormat: "Formato",
+      bookingFactFormatValue: "Google Meet",
+      bookingFactAvailability: "Disponibilidad",
+      bookingFactAvailabilityValue: "Seg\u00fan calendario",
+      bookingFactTimezone: "Zona horaria",
+      bookingFactTimezoneValue: "Mostrada localmente",
+      bookingCalendarEyebrow: "Calendario",
+      bookingCalendarTitle: "Elige un horario que funcione.",
+      bookingPlaceholderTitle: "Falta el enlace de reservas de Google Calendar",
+      bookingPlaceholderText:
+        "Agrega aqu\u00ed el enlace de reservas de Google Calendar de Juan y esta p\u00e1gina mostrar\u00e1 el calendario en vivo.",
       riskTitle: "Nota de riesgo",
       riskText:
         "Este es un concepto independiente de sitio web basado en información pública del perfil. No es asesoría financiera, no es una oferta para comprar o vender productos financieros y no es un sitio oficial de eToro. El copy trading y la inversión implican riesgo, incluida la posible pérdida de capital. El rendimiento pasado no garantiza resultados futuros. Verifica siempre los detalles directamente en eToro y considera tus propias circunstancias.",
@@ -199,6 +249,42 @@
   let activeProfile = null;
 
   const translate = (key) => translations[activeLanguage][key] || translations.en[key] || "";
+  const getPageTitle = () => (pageName === "booking" ? translate("bookingPageTitle") : translate("pageTitle"));
+
+  const syncBookingWidget = () => {
+    if (!bookingLink) return;
+
+    if (hasBookingUrl) {
+      bookingLink.href = bookingUrl;
+      bookingLink.target = "_blank";
+      bookingLink.rel = "noopener noreferrer";
+      bookingLink.removeAttribute("aria-disabled");
+      bookingLink.textContent = translate("bookingOpen");
+
+      if (bookingFrame) {
+        bookingFrame.src = bookingUrl;
+        bookingFrame.hidden = false;
+      }
+      if (bookingPlaceholder) {
+        bookingPlaceholder.hidden = true;
+      }
+      return;
+    }
+
+    bookingLink.removeAttribute("href");
+    bookingLink.removeAttribute("target");
+    bookingLink.removeAttribute("rel");
+    bookingLink.setAttribute("aria-disabled", "true");
+    bookingLink.textContent = translate("bookingPendingButton");
+
+    if (bookingFrame) {
+      bookingFrame.removeAttribute("src");
+      bookingFrame.hidden = true;
+    }
+    if (bookingPlaceholder) {
+      bookingPlaceholder.hidden = false;
+    }
+  };
 
   const syncThemeButton = () => {
     const isDark = root.dataset.theme === "dark";
@@ -221,7 +307,7 @@
   const applyLanguage = (language, persist) => {
     activeLanguage = language;
     root.lang = language;
-    document.title = translate("pageTitle");
+    document.title = getPageTitle();
 
     document.querySelectorAll("[data-i18n]").forEach((element) => {
       const value = translate(element.dataset.i18n);
@@ -235,6 +321,7 @@
     });
 
     syncThemeButton();
+    syncBookingWidget();
     applyProfileData(activeProfile);
     if (persist) {
       storeValue(languageStorageKey, language);
