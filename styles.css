@@ -195,6 +195,11 @@ img {
   color: var(--ink);
 }
 
+.nav-links a[aria-current="page"] {
+  background: var(--green);
+  color: #001705;
+}
+
 .header-actions {
   display: inline-flex;
   align-items: center;
@@ -380,6 +385,11 @@ h3 {
   color: var(--ink);
 }
 
+.button[aria-disabled="true"] {
+  cursor: not-allowed;
+  opacity: 0.72;
+}
+
 .profile-panel {
   overflow: hidden;
   border: 1px solid var(--line);
@@ -464,6 +474,101 @@ h3 {
   margin: 2px 0 0;
   font-size: 1.15rem;
   font-weight: 950;
+}
+
+.booking-hero {
+  border-bottom: 1px solid var(--line);
+  background:
+    linear-gradient(135deg, color-mix(in srgb, var(--green-soft) 62%, transparent), transparent 46%),
+    var(--surface);
+}
+
+.booking-hero-inner {
+  width: var(--container);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(260px, 360px);
+  gap: 44px;
+  align-items: stretch;
+  padding: 76px 0 64px;
+}
+
+.booking-copy {
+  align-self: center;
+}
+
+.booking-summary {
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface-raised);
+  box-shadow: var(--shadow);
+  padding: 24px;
+}
+
+.booking-facts {
+  display: grid;
+  gap: 14px;
+  margin: 22px 0 0;
+}
+
+.booking-facts div {
+  border-top: 1px solid var(--line);
+  padding-top: 14px;
+}
+
+.booking-facts dt {
+  color: var(--muted);
+  font-size: 0.78rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.booking-facts dd {
+  margin: 4px 0 0;
+  font-size: 1.12rem;
+  font-weight: 900;
+}
+
+.booking-section {
+  width: var(--container);
+  margin: 0 auto;
+  padding: 72px 0 88px;
+}
+
+.booking-widget {
+  min-height: 520px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface-raised);
+  overflow: hidden;
+}
+
+.booking-frame {
+  width: 100%;
+  min-height: 680px;
+  border: 0;
+  background: var(--surface);
+}
+
+.booking-placeholder {
+  display: grid;
+  min-height: 520px;
+  place-items: center;
+  padding: 28px;
+  text-align: center;
+}
+
+.booking-placeholder strong {
+  max-width: 560px;
+  font-size: clamp(1.45rem, 3vw, 2.5rem);
+  line-height: 1.1;
+}
+
+.booking-placeholder p {
+  max-width: 560px;
+  margin: 14px 0 0;
+  color: var(--muted);
+  font-size: 1.05rem;
 }
 
 .snapshot-band {
@@ -800,6 +905,7 @@ h3 {
   }
 
   .hero-inner,
+  .booking-hero-inner,
   .section-header,
   .strategy-layout,
   .quote-band {
@@ -808,6 +914,10 @@ h3 {
 
   .hero-inner {
     padding-top: 40px;
+  }
+
+  .booking-hero-inner {
+    padding-top: 44px;
   }
 
   .section-header p {
