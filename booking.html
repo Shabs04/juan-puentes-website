@@ -100,24 +100,81 @@
       <section class="booking-section" id="booking-calendar" aria-labelledby="booking-calendar-title">
         <div class="section-header compact">
           <p class="eyebrow" data-i18n="bookingCalendarEyebrow">Calendar</p>
-          <h2 id="booking-calendar-title" data-i18n="bookingCalendarTitle">Select a time that works.</h2>
+          <h2 id="booking-calendar-title" data-i18n="bookingCalendarTitle">Choose a preferred meeting window.</h2>
         </div>
 
-        <div class="booking-widget">
-          <iframe
-            class="booking-frame"
-            data-booking-frame
-            title="Google Calendar appointment schedule"
-            hidden
-          ></iframe>
-          <div class="booking-placeholder" data-booking-placeholder>
-            <strong data-i18n="bookingPlaceholderTitle">Google Calendar booking link needed</strong>
-            <p data-i18n="bookingPlaceholderText">
-              Add Juan's Google Calendar appointment schedule link here, and this page will show the
-              live booking calendar.
-            </p>
+        <div class="calendar-layout">
+          <div class="calendar-shell" data-scheduler>
+            <div class="calendar-toolbar" aria-label="Calendar controls">
+              <div class="calendar-toolbar-group">
+                <button class="calendar-icon-button" type="button" data-week-action="previous" aria-label="Previous week">&lsaquo;</button>
+                <button class="calendar-today" type="button" data-week-action="today" data-i18n="bookingToday">Today</button>
+                <button class="calendar-icon-button" type="button" data-week-action="next" aria-label="Next week">&rsaquo;</button>
+              </div>
+              <strong class="calendar-range" data-week-label>25-29 May, 2026</strong>
+              <div class="calendar-toolbar-group">
+                <span class="calendar-pill" data-i18n="bookingWorkWeek">Work week</span>
+                <span class="calendar-pill" data-i18n="bookingCalendarReady">Google / iOS ready</span>
+              </div>
+            </div>
+
+            <div class="calendar-meta">
+              <span data-i18n="bookingTimeZone">Time zone</span>
+              <strong data-timezone-label>Australia/Sydney</strong>
+            </div>
+
+            <div class="calendar-viewport" aria-label="Work week calendar">
+              <div class="calendar-grid" data-calendar-grid>
+                <p data-i18n="bookingGridFallback">Calendar loading</p>
+              </div>
+            </div>
           </div>
+
+          <aside class="slot-panel" aria-labelledby="selected-slot-title">
+            <p class="eyebrow" data-i18n="bookingSelectedEyebrow">Selected time</p>
+            <h3 id="selected-slot-title" data-i18n="bookingSelectedTitle">Pick a time on the calendar.</h3>
+            <p data-selected-slot data-i18n="bookingNoSlot">Choose a slot to prepare Google Calendar and Apple Calendar options.</p>
+            <div class="slot-actions" aria-label="Calendar actions">
+              <a
+                class="button button-primary"
+                data-official-booking-link
+                data-i18n="bookingOfficialPending"
+                aria-disabled="true"
+              >Official link pending</a>
+              <a
+                class="button button-secondary"
+                data-google-event-link
+                data-i18n="bookingGoogleHold"
+                aria-disabled="true"
+              >Add to Google Calendar</a>
+              <a
+                class="button button-secondary"
+                data-ics-link
+                download="juan-puentes-meeting.ics"
+                data-i18n="bookingAppleHold"
+                aria-disabled="true"
+              >Apple Calendar .ics</a>
+            </div>
+            <p class="slot-note" data-i18n="bookingSlotNote">
+              Calendar holds are for your device only. Juan's real availability and Google Meet details are confirmed through the official Google booking page once connected.
+            </p>
+          </aside>
         </div>
+
+        <div class="booking-placeholder" data-booking-placeholder>
+          <strong data-i18n="bookingPlaceholderTitle">Google Calendar booking link needed</strong>
+          <p data-i18n="bookingPlaceholderText">
+            Add Juan's Google Calendar appointment schedule link to activate live availability and
+            Google Meet confirmation.
+          </p>
+        </div>
+
+        <iframe
+          class="booking-frame"
+          data-booking-frame
+          title="Google Calendar appointment schedule"
+          hidden
+        ></iframe>
       </section>
     </main>
 
