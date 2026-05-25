@@ -75,6 +75,9 @@
       personaCardThreeTitle: "Future-facing",
       personaCardThreeText:
         "Combines broad ETF exposure with selective innovative assets, keeping the message modern but still measured.",
+      etoroBioSource: "Synced from eToro",
+      etoroBioTitle: "Latest eToro bio",
+      etoroBioLoading: "Latest public eToro bio loads from refreshed profile data.",
       strategyEyebrow: "Strategy architecture",
       strategyTitle: "A balanced framework for public communication.",
       allocationEtf: "ETF core",
@@ -196,6 +199,9 @@
       personaCardThreeTitle: "Mirada al futuro",
       personaCardThreeText:
         "Combina exposición amplia a ETFs con activos innovadores selectivos, manteniendo un mensaje moderno pero medido.",
+      etoroBioSource: "Sincronizado desde eToro",
+      etoroBioTitle: "Biografía actual de eToro",
+      etoroBioLoading: "La biografía pública de eToro se carga desde los datos actualizados.",
       strategyEyebrow: "Arquitectura de estrategia",
       strategyTitle: "Un marco equilibrado para comunicar públicamente.",
       allocationEtf: "Base ETF",
@@ -622,6 +628,16 @@
     });
   };
 
+  const setSourceText = (selector, value, language) => {
+    if (!value) return;
+    document.querySelectorAll(selector).forEach((element) => {
+      element.textContent = value;
+      if (language) {
+        element.lang = language;
+      }
+    });
+  };
+
   const formatDate = (isoDate) => {
     if (!isoDate) return "";
     const date = new Date(isoDate);
@@ -646,6 +662,7 @@
     setText('[data-profile="instagramSummary"]', instagram.summary);
     setText('[data-profile="tiktokSummary"]', tiktok.summary);
     setText('[data-profile="lastUpdated"]', formatDate(profile.lastUpdated));
+    setSourceText('[data-profile="etoroFullBio"]', etoro.fullBio, etoro.bioLanguage);
 
     if (etoro.avatarUrl) {
       document.querySelectorAll("[data-profile-image='avatar']").forEach((image) => {

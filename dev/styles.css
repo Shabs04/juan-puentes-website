@@ -943,6 +943,26 @@ h3 {
   margin: 12px 0 0;
 }
 
+.full-bio-card {
+  margin-top: 14px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface-raised);
+  padding: 28px;
+}
+
+.full-bio-card h3 {
+  margin-top: 10px;
+}
+
+.full-bio-text {
+  max-width: 900px;
+  margin: 16px 0 0;
+  color: var(--muted);
+  font-size: 1.03rem;
+  white-space: pre-line;
+}
+
 .strategy-section {
   border-top: 1px solid var(--line);
 }
