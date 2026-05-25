@@ -18,8 +18,8 @@
     <title>Book Time With Juan Puentes</title>
     <link rel="canonical" href="https://juanpuentesb.github.io/booking.html">
     <link rel="icon" href="favicon.svg" type="image/svg+xml">
-    <link rel="stylesheet" href="styles.css?v=20260525-week-label">
-    <script defer src="script.js?v=20260525-week-label"></script>
+    <link rel="stylesheet" href="styles.css?v=20260525-current-week">
+    <script defer src="script.js?v=20260525-current-week"></script>
   </head>
   <body data-page="booking">
     <a class="skip-link" href="#main" data-i18n="skipLink">Skip to content</a>
@@ -108,7 +108,6 @@
             <div class="calendar-toolbar" aria-label="Calendar controls">
               <div class="calendar-toolbar-group">
                 <button class="calendar-icon-button" type="button" data-week-action="previous" aria-label="Previous week">&lsaquo;</button>
-                <button class="calendar-today" type="button" data-week-action="today" data-i18n="bookingThisWeek">This week</button>
                 <button class="calendar-icon-button" type="button" data-week-action="next" aria-label="Next week">&rsaquo;</button>
               </div>
               <span class="calendar-range-wrap">
@@ -116,6 +115,7 @@
                 <span class="calendar-relative" data-week-relative>This week</span>
               </span>
               <div class="calendar-toolbar-group">
+                <button class="calendar-current-week" type="button" data-week-action="today" data-i18n="bookingCurrentWeek">Current week</button>
                 <span class="calendar-pill" data-i18n="bookingWorkWeek">Work week</span>
                 <span class="calendar-pill" data-i18n="bookingCalendarReady">Google / iOS ready</span>
               </div>
