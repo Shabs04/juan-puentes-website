@@ -196,8 +196,8 @@ img {
 }
 
 .nav-links a[aria-current="page"] {
-  background: var(--green);
-  color: #001705;
+  background: color-mix(in srgb, var(--green) 40%, var(--green-soft));
+  color: var(--ink);
 }
 
 .nav-links .nav-start {
@@ -205,6 +205,13 @@ img {
   align-items: center;
   gap: 4px;
   font-weight: 900;
+  background: var(--green);
+  color: #001705;
+}
+
+.nav-links .nav-start:hover {
+  background: color-mix(in srgb, var(--green) 84%, white);
+  color: #001705;
 }
 
 .nav-external {
