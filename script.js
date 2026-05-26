@@ -62,10 +62,10 @@
       snapshotStyle: "Style",
       snapshotStyleTitle: "Modern DCA",
       snapshotStyleText: "A repeatable accumulation mindset rather than short-term market noise.",
-      personaEyebrow: "Investor persona",
+      personaEyebrow: "Investor profile",
       personaTitle: "Calm, direct, and built for people who want the long game.",
       personaIntro:
-        "The tone is simple: investing is not gambling. The persona should feel approachable, bilingual, grounded, and confident without promising outcomes.",
+        "The tone is simple: investing is not gambling. The profile should feel approachable, bilingual, grounded, and confident without promising outcomes.",
       personaCardOneTitle: "Everyday clarity",
       personaCardOneText:
         "Speaks to people who are learning to invest like normal people, using plain language and practical decision rules.",
@@ -686,6 +686,54 @@
 
   applyTheme(getStoredValue(themeStorageKey) || getSystemTheme(), false);
   applyLanguage(activeLanguage, false);
+
+  const navLinks = document.querySelectorAll(".nav-links a");
+
+  if (window.location.hash) {
+    const matchingLink = document.querySelector(`.nav-links a[href="${window.location.hash}"]`);
+    if (matchingLink) {
+      navLinks.forEach((l) => l.removeAttribute("aria-current"));
+      matchingLink.setAttribute("aria-current", "page");
+    }
+  }
+
+  navLinks.forEach((link) => {
+    link.addEventListener("click", () => {
+      navLinks.forEach((l) => l.removeAttribute("aria-current"));
+      link.setAttribute("aria-current", "page");
+    });
+  });
+
+  const spySections = ["persona", "strategy", "connect"]
+    .map((id) => document.getElementById(id))
+    .filter(Boolean);
+
+  if (spySections.length) {
+    const scrollSpy = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const match = document.querySelector(`.nav-links a[href="#${entry.target.id}"]`);
+            if (match) {
+              navLinks.forEach((l) => l.removeAttribute("aria-current"));
+              match.setAttribute("aria-current", "page");
+            }
+          }
+        });
+      },
+      { rootMargin: "-80px 0px -55% 0px", threshold: 0 }
+    );
+    spySections.forEach((el) => scrollSpy.observe(el));
+  }
+
+  const bioToggle = document.querySelector("[data-bio-toggle]");
+  if (bioToggle) {
+    bioToggle.addEventListener("click", () => {
+      const card = bioToggle.closest(".full-bio-card");
+      const expanded = card.classList.toggle("is-expanded");
+      bioToggle.textContent = expanded ? "Show less" : "Read more";
+    });
+  }
 
   themeToggle.addEventListener("click", () => {
     applyTheme(root.dataset.theme === "dark" ? "light" : "dark", true);

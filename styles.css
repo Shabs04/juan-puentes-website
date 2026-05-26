@@ -201,14 +201,15 @@ img {
 }
 
 .nav-links .nav-start {
-  background: var(--green);
-  color: #001705;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
   font-weight: 900;
 }
 
-.nav-links .nav-start:hover {
-  background: color-mix(in srgb, var(--green) 84%, white);
-  color: #001705;
+.nav-external {
+  opacity: 0.5;
+  flex-shrink: 0;
 }
 
 .header-actions {
@@ -269,26 +270,23 @@ img {
 }
 
 .theme-toggle-icon {
-  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 18px;
   height: 18px;
-  border: 2px solid currentColor;
-  border-radius: 50%;
 }
 
-.theme-toggle-icon::after {
-  position: absolute;
-  top: -3px;
-  right: -5px;
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background: var(--surface);
-  content: "";
+.theme-toggle-icon .icon-moon {
+  display: none;
 }
 
-:root[data-theme="dark"] .theme-toggle-icon::after {
-  transform: translate(-8px, 5px);
+:root[data-theme="dark"] .theme-toggle-icon .icon-sun {
+  display: none;
+}
+
+:root[data-theme="dark"] .theme-toggle-icon .icon-moon {
+  display: block;
 }
 
 .hero {
@@ -880,12 +878,13 @@ h3 {
   width: var(--container);
   margin: 0 auto;
   padding: 88px 0;
+  scroll-margin-top: 80px;
 }
 
 .section-header {
   display: grid;
   grid-template-columns: minmax(0, 1.1fr) minmax(260px, 0.9fr);
-  gap: 32px;
+  /* gap: 32px; */
   align-items: end;
   margin-bottom: 34px;
 }
@@ -893,6 +892,15 @@ h3 {
 .section-header .eyebrow,
 .section-header h2 {
   grid-column: 1;
+}
+
+.section-header .eyebrow {
+  color: var(--green-deep);
+  margin-bottom: 20px;
+}
+
+.hero .eyebrow {
+  font-size: 1.04rem;
 }
 
 .section-header p {
@@ -955,12 +963,54 @@ h3 {
   margin-top: 10px;
 }
 
+.full-bio-body {
+  position: relative;
+  max-height: 130px;
+  overflow: hidden;
+  transition: max-height 0.35s ease;
+}
+
+.full-bio-card.is-expanded .full-bio-body {
+  max-height: 1000px;
+}
+
+.full-bio-fade {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 48px;
+  background: linear-gradient(to bottom, transparent, var(--surface-raised));
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+}
+
+.full-bio-card.is-expanded .full-bio-fade {
+  opacity: 0;
+}
+
 .full-bio-text {
   max-width: 900px;
   margin: 16px 0 0;
   color: var(--muted);
   font-size: 1.03rem;
   white-space: pre-line;
+}
+
+.full-bio-toggle {
+  margin-top: 12px;
+  border: none;
+  background: none;
+  color: var(--green-deep);
+  font: inherit;
+  font-size: 0.9rem;
+  font-weight: 800;
+  cursor: pointer;
+  padding: 0;
+}
+
+.full-bio-toggle:hover {
+  color: var(--green);
 }
 
 .strategy-section {
