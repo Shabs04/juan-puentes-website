@@ -64,10 +64,17 @@
     </header>
 
     <main id="main">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <div class="breadcrumb-inner">
+          <a href="index.html" data-i18n="navHome">Home</a>
+          <span aria-hidden="true">/</span>
+          <span aria-current="page" data-i18n="navBook">Book time</span>
+        </div>
+      </nav>
+
       <section class="booking-hero" aria-labelledby="booking-title">
         <div class="booking-hero-inner">
           <div class="booking-copy">
-            <p class="eyebrow" data-i18n="bookingEyebrow">Book time</p>
             <h1 id="booking-title" data-i18n="bookingTitle">Book a Google Meet with Juan.</h1>
             <p class="hero-lede" data-i18n="bookingLede">
               Choose an available time from Juan's calendar. The booking flow handles time zones
@@ -81,7 +88,6 @@
                 data-booking-url=""
                 data-i18n="bookingPendingButton"
               >Calendar link pending</a>
-              <a class="button button-secondary" href="index.html" data-i18n="bookingBackHome">Back to home</a>
             </nav>
           </div>
 
