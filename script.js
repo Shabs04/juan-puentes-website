@@ -103,6 +103,9 @@
       socialInstagram: "Education and journey",
       socialTiktok: "Short-form insights",
       tiktokManualNote: "Reviewed public TikTok profile stats",
+      navHome: "Home",
+      bioReadMore: "Read more",
+      bioShowLess: "Show less",
       bookingEyebrow: "Book time",
       bookingTitle: "Book a Google Meet with Juan.",
       bookingLede:
@@ -227,6 +230,9 @@
       socialInstagram: "Educación y camino",
       socialTiktok: "Ideas en formato corto",
       tiktokManualNote: "Estadísticas públicas revisadas de TikTok",
+      navHome: "Inicio",
+      bioReadMore: "Leer más",
+      bioShowLess: "Mostrar menos",
       bookingEyebrow: "Reservar",
       bookingTitle: "Reserva un Google Meet con Juan.",
       bookingLede:
@@ -596,6 +602,13 @@
     }
   };
 
+  const bioToggle = document.querySelector("[data-bio-toggle]");
+  const syncBioToggleText = () => {
+    if (!bioToggle) return;
+    const expanded = bioToggle.closest(".full-bio-card")?.classList.contains("is-expanded");
+    bioToggle.textContent = expanded ? translate("bioShowLess") : translate("bioReadMore");
+  };
+
   const applyLanguage = (language, persist) => {
     activeLanguage = language;
     root.lang = language;
@@ -614,6 +627,7 @@
 
     syncThemeButton();
     syncBookingWidget();
+    syncBioToggleText();
     renderScheduler();
     applyProfileData(activeProfile);
     if (persist) {
@@ -726,12 +740,10 @@
     spySections.forEach((el) => scrollSpy.observe(el));
   }
 
-  const bioToggle = document.querySelector("[data-bio-toggle]");
   if (bioToggle) {
     bioToggle.addEventListener("click", () => {
-      const card = bioToggle.closest(".full-bio-card");
-      const expanded = card.classList.toggle("is-expanded");
-      bioToggle.textContent = expanded ? "Show less" : "Read more";
+      bioToggle.closest(".full-bio-card").classList.toggle("is-expanded");
+      syncBioToggleText();
     });
   }
 
