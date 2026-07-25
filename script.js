@@ -9,8 +9,18 @@
   const contactMessage = document.querySelector("[data-contact-message]");
   const copyMessageButton = document.querySelector("[data-copy-message]");
   const copyStatus = document.querySelector("[data-copy-status]");
-  const socialContactLinks = document.querySelectorAll("[data-copy-before-open]");
-  const emailLink = document.querySelector("[data-email-link]");
+  const contactOrigin = document.querySelector("[data-contact-origin]");
+  const contactLocation = document.querySelector("[data-contact-location]");
+  const contactTimeZone = document.querySelector("[data-contact-timezone]");
+  const contactRouteStep = document.querySelector("[data-contact-route-step]");
+  const contactRouteName = document.querySelector("[data-contact-route-name]");
+  const contactRouteDescription = document.querySelector("[data-contact-route-description]");
+  const contactEmailAddress = document.querySelector("[data-contact-email-address]");
+  const contactAction = document.querySelector("[data-contact-action]");
+  const contactPrevious = document.querySelector("[data-contact-previous]");
+  const contactNext = document.querySelector("[data-contact-next]");
+  const publicContactEmail = "j.puentesb@hotmail.com";
+  const userTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone || "Local time";
 
   const translations = {
     en: {
@@ -20,101 +30,116 @@
       themeToLight: "Switch to light theme",
       skipLink: "Skip to content",
       brandRole: "eToro Popular Investor",
-      navPersona: "About Juan",
+      navPersona: "About me",
       navStrategy: "Strategy",
       navConnect: "Connect",
       navStartEtoro: "Start on eToro",
-      heroEyebrow: "Public investor profile",
+      heroEyebrow: "My investor profile",
       heroTitle: "Long-term investing, built with discipline.",
       heroLede:
-        "Juan Puentes Botero is a Colombian investor living in Australia, sharing a practical investing journey centered on stability, innovation, DCA, ETF foundations, and smart risk control.",
+        "I'm Juan Puentes Botero, a Colombian investor living in Australia. I share a practical investing journey centered on stability, innovation, DCA, ETF foundations, and smart risk control.",
       viewEtoro: "View eToro profile",
       followInstagram: "Follow on Instagram",
       followTiktok: "Follow on TikTok",
       verifiedProfile: "Verified profile",
       popularInvestor: "Popular Investor",
-      profileStartInvesting: "Invest with Juan",
+      profileStartInvesting: "Invest with me",
       statSince: "Since",
       statBase: "Base",
       statCopyFrom: "Copy from",
       snapshotOrigin: "Origin",
       snapshotOriginTitle: "Colombia to Australia",
-      snapshotOriginText: "A cross-border investor voice with content for everyday people learning to invest.",
+      snapshotOriginText: "I share a cross-border investor perspective for everyday people learning to invest.",
       snapshotFocus: "Public focus",
       snapshotFocusTitle: "Long-term growth",
-      snapshotFocusText: "Stability, innovation, risk control, and avoiding emotional decision making.",
+      snapshotFocusText: "I focus on stability, innovation, risk control, and avoiding emotional decisions.",
       snapshotProof: "Social proof",
-      snapshotProofText: "Listed in Juan's Instagram bio at the time this site was drafted.",
+      snapshotProofText: "You can find this profile linked in my Instagram bio.",
       snapshotStyle: "Style",
       snapshotStyleTitle: "Modern DCA",
-      snapshotStyleText: "A repeatable accumulation mindset rather than short-term market noise.",
-      personaEyebrow: "Investor profile",
-      personaTitle: "Calm, direct, and built for people who want the long game.",
+      snapshotStyleText: "I follow a repeatable accumulation mindset rather than short-term market noise.",
+      personaEyebrow: "My investor profile",
+      personaTitle: "I invest calmly, directly, and for the long game.",
       personaIntro:
-        "The tone is simple: investing is not gambling. The profile should feel approachable, bilingual, grounded, and confident without promising outcomes.",
+        "My view is simple: investing is not gambling. I aim to be approachable, bilingual, grounded, and confident without promising outcomes.",
       personaCardOneTitle: "Everyday clarity",
       personaCardOneText:
-        "Speaks to people who are learning to invest like normal people, using plain language and practical decision rules.",
+        "I speak to everyday people who are learning to invest, using plain language and practical decision rules.",
       personaCardTwoTitle: "Discipline over hype",
       personaCardTwoText:
-        "Positions patience, process, and emotional control as the edge, especially when markets get noisy.",
+        "I treat patience, process, and emotional control as an edge, especially when markets get noisy.",
       personaCardThreeTitle: "Future-facing",
       personaCardThreeText:
-        "Combines broad ETF exposure with selective innovative assets, keeping the message modern but still measured.",
+        "I combine broad ETF exposure with selective innovative assets, keeping my approach modern but measured.",
       etoroBioSource: "Synced from eToro",
       etoroBioTitle: "Latest eToro bio",
       etoroBioLoading: "Latest public eToro bio loads from refreshed profile data.",
-      strategyEyebrow: "Strategy architecture",
-      strategyTitle: "A balanced framework for public communication.",
+      strategyEyebrow: "My strategy",
+      strategyTitle: "How I approach long-term investing.",
       allocationEtf: "ETF core",
       allocationInnovation: "Innovation",
       allocationDca: "DCA rhythm",
       allocationRisk: "Risk review",
       strategyCardOneTitle: "Foundation first",
-      strategyCardOneText: "Use world-class ETFs as the steady base of the story.",
+      strategyCardOneText: "I use world-class ETFs as a steady foundation.",
       strategyCardTwoTitle: "Innovation with boundaries",
-      strategyCardTwoText: "Highlight forward-looking assets while keeping the risk language visible.",
+      strategyCardTwoText: "I consider forward-looking assets while keeping risk visible.",
       strategyCardThreeTitle: "DCA and patience",
-      strategyCardThreeText: "Make consistency the signature behavior, not market timing.",
+      strategyCardThreeText: "I prioritize consistency rather than trying to time the market.",
       strategyCardFourTitle: "Transparent risk",
-      strategyCardFourText: "Keep copy trading framed as a decision that needs personal research.",
-      quoteEyebrow: "Message platform",
+      strategyCardFourText: "I believe copy trading is a decision that requires personal research.",
+      quoteEyebrow: "What guides me",
       quoteText:
-        "To have things you have never had, you have to do things you have never done. For Juan's brand, that means patient action, education, and discipline over shortcuts.",
+        "For me, these words mean patient action, education, and discipline over shortcuts.",
       connectEyebrow: "Connect",
-      connectTitle: "Send Juan a message.",
+      connectTitle: "Send me a message.",
       connectIntro:
-        "Use the editable draft, then start with Instagram. TikTok is the second option and email is available for longer enquiries once Juan publishes a contact address.",
+        "Tell me where you are from and where you are currently located, then use one contact channel. Start with Instagram and wait for a reply before trying TikTok or email.",
       messageDraftEyebrow: "Message draft",
       messageDraftTitle: "A friendly introduction",
+      messageLocationIntro:
+        "Add your origin and current location. Your browser time zone will be included automatically.",
+      contactOriginLabel: "Where are you from?",
+      contactOriginPlaceholder: "e.g. Bogotá, Colombia",
+      contactLocationLabel: "Where are you currently located?",
+      contactLocationPlaceholder: "e.g. Sydney, Australia",
+      contactTimezoneLabel: "Time zone included:",
       messageDraftLabel: "Edit your message before sending",
+      contactOriginFallback: "[where you are from]",
+      contactLocationFallback: "[where you currently live]",
       contactMessageText:
-        "Hi Juan, I found your website and would love to connect. I am interested in learning more about your long-term investing approach and the educational content you share. Thank you!",
+        "Hi Juan, I found your website and would love to connect. I am originally from {origin}, and I am currently located in {location}. My current time zone is {timeZone}. I am interested in learning more about your long-term investing approach and the educational content you share. Please let me know a suitable time to connect. Thank you!",
       copyReady: "Ready to copy",
       copyMessage: "Copy message",
       copySuccess: "Message copied. Paste it into your conversation.",
       copyError: "Select the message and copy it manually.",
-      contactChannelsEyebrow: "Where to send it",
+      copyMissingLocation: "Add your origin and current location first.",
+      contactChannelsEyebrow: "One channel at a time",
       contactChannelsTitle: "Start with Instagram.",
       contactChannelsText:
-        "Your message is copied when you open a social channel. Paste it into a direct message if Juan's account allows messages.",
-      contactInstagramText: "Juan's preferred contact channel.",
-      contactTiktokText: "Use TikTok if Instagram is not available.",
+        "Please use one option and wait for a reply. Move to the next only if the previous channel is unavailable.",
+      contactOptionLabel: "Option",
+      contactOptionOf: "of",
+      contactInstagramText: "My preferred contact channel.",
+      contactTiktokText: "Use only if Instagram is unavailable.",
       contactEmailTitle: "Email",
-      contactEmailText: "Best for longer enquiries.",
-      contactEmailSubject: "Message from Juan's website",
+      contactEmailText: "Use email only if neither social channel is available.",
+      contactEmailSubject: "Website message",
       openInstagram: "Copy & open Instagram",
       openTiktok: "Copy & open TikTok",
       openEmail: "Open email",
       emailPending: "Public email needed",
+      contactPrevious: "Previous option",
+      contactTryTiktok: "Instagram unavailable? Try TikTok",
+      contactTryEmail: "TikTok unavailable? Try email",
       tiktokManualNote: "Reviewed public TikTok profile stats",
       navHome: "Home",
       bioReadMore: "Read more",
       bioShowLess: "Show less",
       riskTitle: "Risk note",
       riskText:
-        "This is an independent profile website concept based on public profile information. It is not financial advice, not an offer to buy or sell financial products, and not an official eToro website. Copy trading and investing involve risk, including possible loss of capital. Past performance does not guarantee future results. Always verify details directly on eToro and consider your own circumstances.",
-      footerText: "Juan Puentes Botero. Public investor profile.",
+        "This website shares my public profile. It is not financial advice, an offer to buy or sell financial products, or an official eToro website. Copy trading and investing involve risk, including possible loss of capital. Past performance does not guarantee future results. Always verify details directly on eToro and consider your own circumstances.",
+      footerText: "I'm Juan Puentes Botero. This is my public investor profile.",
       footerDataText: "Data refreshed",
       footerEtoro: "eToro profile",
       footerInstagram: "Instagram profile",
@@ -127,101 +152,116 @@
       themeToLight: "Cambiar a tema claro",
       skipLink: "Saltar al contenido",
       brandRole: "Inversionista Popular en eToro",
-      navPersona: "Sobre Juan",
+      navPersona: "Sobre mí",
       navStrategy: "Estrategia",
       navConnect: "Conectar",
       navStartEtoro: "Empezar en eToro",
-      heroEyebrow: "Perfil público de inversionista",
+      heroEyebrow: "Mi perfil de inversionista",
       heroTitle: "Inversión a largo plazo, construida con disciplina.",
       heroLede:
-        "Juan Puentes Botero es un inversionista colombiano viviendo en Australia, compartiendo un camino práctico de inversión basado en estabilidad, innovación, DCA, ETFs como base y control inteligente del riesgo.",
+        "Soy Juan Puentes Botero, un inversionista colombiano que vive en Australia. Comparto un camino práctico de inversión basado en estabilidad, innovación, DCA, ETFs como base y control inteligente del riesgo.",
       viewEtoro: "Ver perfil de eToro",
       followInstagram: "Seguir en Instagram",
       followTiktok: "Seguir en TikTok",
       verifiedProfile: "Perfil verificado",
       popularInvestor: "Inversionista Popular",
-      profileStartInvesting: "Invierte con Juan",
+      profileStartInvesting: "Invierte conmigo",
       statSince: "Desde",
       statBase: "Base",
       statCopyFrom: "Copiar desde",
       snapshotOrigin: "Origen",
       snapshotOriginTitle: "De Colombia a Australia",
-      snapshotOriginText: "Una voz inversionista multicultural con contenido para personas comunes que quieren aprender a invertir.",
+      snapshotOriginText: "Comparto una perspectiva multicultural para personas comunes que quieren aprender a invertir.",
       snapshotFocus: "Enfoque público",
       snapshotFocusTitle: "Crecimiento a largo plazo",
-      snapshotFocusText: "Estabilidad, innovación, control del riesgo y decisiones sin dejarse llevar por las emociones.",
+      snapshotFocusText: "Me enfoco en estabilidad, innovación, control del riesgo y decisiones sin dejarme llevar por las emociones.",
       snapshotProof: "Prueba social",
-      snapshotProofText: "Listado en la biografía de Instagram de Juan cuando se redactó este sitio.",
+      snapshotProofText: "Puedes encontrar este perfil enlazado en mi biografía de Instagram.",
       snapshotStyle: "Estilo",
       snapshotStyleTitle: "DCA moderno",
-      snapshotStyleText: "Una mentalidad de acumulación constante en lugar de ruido de corto plazo.",
-      personaEyebrow: "Persona inversionista",
-      personaTitle: "Equilibrado, directo y pensado para quienes quieren jugar a largo plazo.",
+      snapshotStyleText: "Sigo una mentalidad de acumulación constante en lugar del ruido de corto plazo.",
+      personaEyebrow: "Mi perfil de inversionista",
+      personaTitle: "Invierto con un enfoque equilibrado, directo y de largo plazo.",
       personaIntro:
-        "El tono es simple: estamos invirtiendo, no apostando. La persona debe sentirse cercana, bilingüe, aterrizada y segura, sin prometer resultados.",
+        "Mi visión es simple: invierto, no apuesto. Busco ser cercano, bilingüe, realista y seguro, sin prometer resultados.",
       personaCardOneTitle: "Claridad cotidiana",
       personaCardOneText:
-        "Habla a personas que están aprendiendo a invertir como gente normal, con lenguaje claro y reglas prácticas de decisión.",
+        "Hablo a personas comunes que están aprendiendo a invertir, con lenguaje claro y reglas prácticas de decisión.",
       personaCardTwoTitle: "Disciplina sobre hype",
       personaCardTwoText:
-        "Presenta la paciencia, el proceso y el control emocional como ventaja, especialmente cuando el mercado se vuelve ruidoso.",
+        "Considero la paciencia, el proceso y el control emocional como una ventaja, especialmente cuando el mercado se vuelve ruidoso.",
       personaCardThreeTitle: "Mirada al futuro",
       personaCardThreeText:
-        "Combina exposición amplia a ETFs con activos innovadores selectivos, manteniendo un mensaje moderno pero medido.",
+        "Combino exposición amplia a ETFs con activos innovadores selectivos, manteniendo mi enfoque moderno pero medido.",
       etoroBioSource: "Sincronizado desde eToro",
       etoroBioTitle: "Biografía actual de eToro",
       etoroBioLoading: "La biografía pública de eToro se carga desde los datos actualizados.",
-      strategyEyebrow: "Arquitectura de estrategia",
-      strategyTitle: "Un marco equilibrado para comunicar públicamente.",
+      strategyEyebrow: "Mi estrategia",
+      strategyTitle: "Cómo abordo la inversión a largo plazo.",
       allocationEtf: "Base ETF",
       allocationInnovation: "Innovación",
       allocationDca: "Ritmo DCA",
       allocationRisk: "Revisión de riesgo",
       strategyCardOneTitle: "Primero la base",
-      strategyCardOneText: "Usar ETFs de clase mundial como la base estable de la historia.",
+      strategyCardOneText: "Uso ETFs de clase mundial como una base estable.",
       strategyCardTwoTitle: "Innovación con límites",
-      strategyCardTwoText: "Destacar activos con visión de futuro manteniendo visible el lenguaje de riesgo.",
+      strategyCardTwoText: "Considero activos con visión de futuro manteniendo visible el riesgo.",
       strategyCardThreeTitle: "DCA y paciencia",
-      strategyCardThreeText: "Hacer de la constancia el comportamiento central, no intentar adivinar el mercado.",
+      strategyCardThreeText: "Priorizo la constancia en lugar de intentar adivinar el mercado.",
       strategyCardFourTitle: "Riesgo transparente",
-      strategyCardFourText: "Enmarcar el copy trading como una decisión que requiere investigación personal.",
-      quoteEyebrow: "Mensaje central",
+      strategyCardFourText: "Creo que el copy trading es una decisión que requiere investigación personal.",
+      quoteEyebrow: "Lo que me guía",
       quoteText:
-        "Para tener cosas que nunca has tenido, tienes que hacer cosas que nunca has hecho. Para la marca de Juan, eso significa acción paciente, educación y disciplina por encima de los atajos.",
+        "Para mí, estas palabras significan acción paciente, educación y disciplina por encima de los atajos.",
       connectEyebrow: "Conectar",
-      connectTitle: "Env\u00edale un mensaje a Juan.",
+      connectTitle: "Env\u00edame un mensaje.",
       connectIntro:
-        "Usa el borrador editable y empieza por Instagram. TikTok es la segunda opci\u00f3n y el correo estar\u00e1 disponible para consultas m\u00e1s largas cuando Juan publique una direcci\u00f3n de contacto.",
+        "Cu\u00e9ntame de d\u00f3nde eres y d\u00f3nde te encuentras actualmente. Usa un solo canal: empieza por Instagram y espera una respuesta antes de probar TikTok o correo.",
       messageDraftEyebrow: "Borrador del mensaje",
       messageDraftTitle: "Una presentaci\u00f3n amable",
+      messageLocationIntro:
+        "A\u00f1ade tu lugar de origen y tu ubicaci\u00f3n actual. La zona horaria de tu navegador se incluir\u00e1 autom\u00e1ticamente.",
+      contactOriginLabel: "\u00bfDe d\u00f3nde eres?",
+      contactOriginPlaceholder: "p. ej., Bogot\u00e1, Colombia",
+      contactLocationLabel: "\u00bfD\u00f3nde te encuentras actualmente?",
+      contactLocationPlaceholder: "p. ej., S\u00eddney, Australia",
+      contactTimezoneLabel: "Zona horaria incluida:",
       messageDraftLabel: "Edita tu mensaje antes de enviarlo",
+      contactOriginFallback: "[tu lugar de origen]",
+      contactLocationFallback: "[tu ubicaci\u00f3n actual]",
       contactMessageText:
-        "Hola Juan, encontr\u00e9 tu sitio web y me gustar\u00eda conectar contigo. Me interesa conocer m\u00e1s sobre tu enfoque de inversi\u00f3n a largo plazo y el contenido educativo que compartes. \u00a1Gracias!",
+        "Hola Juan, encontr\u00e9 tu sitio web y me gustar\u00eda conectar contigo. Soy de {origin} y actualmente estoy en {location}. Mi zona horaria actual es {timeZone}. Me interesa conocer m\u00e1s sobre tu enfoque de inversi\u00f3n a largo plazo y el contenido educativo que compartes. Por favor, dime qu\u00e9 horario te viene bien. \u00a1Gracias!",
       copyReady: "Listo para copiar",
       copyMessage: "Copiar mensaje",
       copySuccess: "Mensaje copiado. P\u00e9galo en tu conversaci\u00f3n.",
       copyError: "Selecciona el mensaje y c\u00f3pialo manualmente.",
-      contactChannelsEyebrow: "D\u00f3nde enviarlo",
+      copyMissingLocation: "A\u00f1ade primero tu lugar de origen y tu ubicaci\u00f3n actual.",
+      contactChannelsEyebrow: "Un canal a la vez",
       contactChannelsTitle: "Empieza por Instagram.",
       contactChannelsText:
-        "Tu mensaje se copia cuando abres una red social. P\u00e9galo en un mensaje directo si la cuenta de Juan permite mensajes.",
-      contactInstagramText: "El canal de contacto preferido de Juan.",
-      contactTiktokText: "Usa TikTok si Instagram no est\u00e1 disponible.",
+        "Usa una sola opci\u00f3n y espera una respuesta. Pasa a la siguiente solo si el canal anterior no est\u00e1 disponible.",
+      contactOptionLabel: "Opci\u00f3n",
+      contactOptionOf: "de",
+      contactInstagramText: "Mi canal de contacto preferido.",
+      contactTiktokText: "Usa TikTok solo si Instagram no est\u00e1 disponible.",
       contactEmailTitle: "Correo",
-      contactEmailText: "La mejor opci\u00f3n para consultas m\u00e1s largas.",
-      contactEmailSubject: "Mensaje desde el sitio web de Juan",
+      contactEmailText: "Usa el correo solo si ninguna red social est\u00e1 disponible.",
+      contactEmailSubject: "Mensaje desde el sitio web",
       openInstagram: "Copiar y abrir Instagram",
       openTiktok: "Copiar y abrir TikTok",
       openEmail: "Abrir correo",
       emailPending: "Falta el correo p\u00fablico",
+      contactPrevious: "Opci\u00f3n anterior",
+      contactTryTiktok: "\u00bfInstagram no est\u00e1 disponible? Prueba TikTok",
+      contactTryEmail: "\u00bfTikTok no est\u00e1 disponible? Prueba el correo",
       tiktokManualNote: "Estadísticas públicas revisadas de TikTok",
       navHome: "Inicio",
       bioReadMore: "Leer más",
       bioShowLess: "Mostrar menos",
       riskTitle: "Nota de riesgo",
       riskText:
-        "Este es un concepto independiente de sitio web basado en información pública del perfil. No es asesoría financiera, no es una oferta para comprar o vender productos financieros y no es un sitio oficial de eToro. El copy trading y la inversión implican riesgo, incluida la posible pérdida de capital. El rendimiento pasado no garantiza resultados futuros. Verifica siempre los detalles directamente en eToro y considera tus propias circunstancias.",
-      footerText: "Juan Puentes Botero. Perfil público de inversionista.",
+        "Este sitio comparte mi perfil público. No es asesoría financiera, una oferta para comprar o vender productos financieros ni un sitio oficial de eToro. El copy trading y la inversión implican riesgo, incluida la posible pérdida de capital. El rendimiento pasado no garantiza resultados futuros. Verifica siempre los detalles directamente en eToro y considera tus propias circunstancias.",
+      footerText: "Soy Juan Puentes Botero. Este es mi perfil público de inversionista.",
       footerDataText: "Datos actualizados",
       footerEtoro: "Perfil de eToro",
       footerInstagram: "Perfil de Instagram",
@@ -257,44 +297,127 @@
   let activeLanguage = getInitialLanguage();
   let activeProfile = null;
   let contactMessageEdited = false;
+  let activeContactRoute = 0;
 
   const translate = (key) => translations[activeLanguage][key] || translations.en[key] || "";
   const getPageTitle = () => translate("pageTitle");
 
-  const syncEmailLink = () => {
-    if (!emailLink || !contactMessage) return;
-    const publicEmail = emailLink.dataset.contactEmail?.trim() || "";
-    const hasPublicEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(publicEmail);
+  const contactRoutes = [
+    {
+      name: "Instagram",
+      descriptionKey: "contactInstagramText",
+      actionKey: "openInstagram",
+      url: "https://www.instagram.com/juanpuentesb/",
+      type: "social",
+    },
+    {
+      name: "TikTok",
+      descriptionKey: "contactTiktokText",
+      actionKey: "openTiktok",
+      url: "https://www.tiktok.com/@juanpuentesb",
+      type: "social",
+    },
+    {
+      nameKey: "contactEmailTitle",
+      descriptionKey: "contactEmailText",
+      actionKey: "openEmail",
+      type: "email",
+    },
+  ];
 
-    if (!hasPublicEmail) {
-      emailLink.removeAttribute("href");
-      emailLink.setAttribute("aria-disabled", "true");
-      emailLink.textContent = translate("emailPending");
-      return;
+  const fillTemplate = (template, values) =>
+    Object.entries(values).reduce(
+      (result, [key, value]) => result.split(`{${key}}`).join(value),
+      template
+    );
+
+  const buildContactMessage = () =>
+    fillTemplate(translate("contactMessageText"), {
+      origin: contactOrigin?.value.trim() || translate("contactOriginFallback"),
+      location: contactLocation?.value.trim() || translate("contactLocationFallback"),
+      timeZone: userTimeZone,
+    });
+
+  const getMissingLocationInput = () =>
+    [contactOrigin, contactLocation].find((input) => input && !input.value.trim());
+
+  const ensureLocationDetails = () => {
+    const missingInput = getMissingLocationInput();
+    if (!missingInput) return true;
+
+    missingInput.setAttribute("aria-invalid", "true");
+    missingInput.focus();
+    if (copyStatus) {
+      copyStatus.textContent = translate("copyMissingLocation");
+    }
+    return false;
+  };
+
+  const syncContactRoute = () => {
+    const route = contactRoutes[activeContactRoute];
+    if (!route || !contactAction) return;
+
+    if (contactRouteStep) {
+      contactRouteStep.textContent = `${translate("contactOptionLabel")} ${activeContactRoute + 1} ${translate("contactOptionOf")} ${contactRoutes.length}`;
+    }
+    if (contactRouteName) {
+      contactRouteName.textContent = route.nameKey ? translate(route.nameKey) : route.name;
+    }
+    if (contactRouteDescription) {
+      contactRouteDescription.textContent = translate(route.descriptionKey);
     }
 
-    const params = new URLSearchParams({
-      subject: translate("contactEmailSubject"),
-      body: contactMessage.value.trim(),
-    });
-    emailLink.href = `mailto:${publicEmail}?${params.toString()}`;
-    emailLink.removeAttribute("aria-disabled");
-    emailLink.textContent = translate("openEmail");
+    const isEmail = route.type === "email";
+    if (contactEmailAddress) {
+      contactEmailAddress.hidden = !isEmail;
+      contactEmailAddress.href = `mailto:${publicContactEmail}`;
+      contactEmailAddress.textContent = publicContactEmail;
+    }
+
+    if (isEmail) {
+      const params = new URLSearchParams({
+        subject: translate("contactEmailSubject"),
+        body: contactMessage?.value.trim() || buildContactMessage(),
+      });
+      contactAction.href = `mailto:${publicContactEmail}?${params.toString()}`;
+      contactAction.removeAttribute("target");
+      contactAction.removeAttribute("rel");
+    } else {
+      contactAction.href = route.url;
+      contactAction.target = "_blank";
+      contactAction.rel = "noopener noreferrer";
+    }
+    contactAction.textContent = translate(route.actionKey);
+
+    if (contactPrevious) {
+      contactPrevious.hidden = activeContactRoute === 0;
+    }
+    if (contactNext) {
+      contactNext.hidden = activeContactRoute === contactRoutes.length - 1;
+      contactNext.textContent =
+        activeContactRoute === 0 ? translate("contactTryTiktok") : translate("contactTryEmail");
+    }
   };
 
   const syncContactMessage = () => {
     if (!contactMessage) return;
     if (!contactMessageEdited) {
-      contactMessage.value = translate("contactMessageText");
+      contactMessage.value = buildContactMessage();
+    }
+    if (contactTimeZone) {
+      contactTimeZone.textContent = userTimeZone;
     }
     if (copyStatus) {
-      copyStatus.textContent = translate("copyReady");
+      copyStatus.textContent = getMissingLocationInput()
+        ? translate("copyMissingLocation")
+        : translate("copyReady");
     }
-    syncEmailLink();
+    syncContactRoute();
   };
 
   const copyContactMessage = async () => {
     if (!contactMessage) return;
+    if (!ensureLocationDetails()) return;
     const message = contactMessage.value.trim();
     if (!message) return;
 
@@ -312,7 +435,6 @@
     }
   };
 
-  const userTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone || "Local time";
   const calendarHours = [14, 15, 16, 17, 18, 19, 20, 21];
   const slotTemplates = [
     { weekday: 1, hour: 16, minute: 0, duration: 30 },
@@ -621,6 +743,12 @@
         element.textContent = value;
       }
     });
+    document.querySelectorAll("[data-i18n-placeholder]").forEach((element) => {
+      const value = translate(element.dataset.i18nPlaceholder);
+      if (value) {
+        element.setAttribute("placeholder", value);
+      }
+    });
 
     languageButtons.forEach((button) => {
       button.setAttribute("aria-pressed", String(button.dataset.language === language));
@@ -672,7 +800,7 @@
     setText('[data-profile="investingSince"]', etoro.investingSince);
     setText('[data-profile="copyMinimum"]', etoro.copyMinimum);
     setText('[data-profile="aumDisplay"]', instagram.aumDisplay);
-    setText('[data-profile="socialProofDetail"]', instagram.socialProofDetail);
+    setText('[data-profile="socialProofDetail"]', translate("snapshotProofText"));
     setText('[data-profile="instagramSummary"]', instagram.summary);
     setText('[data-profile="tiktokSummary"]', tiktok.summary);
     setText('[data-profile="lastUpdated"]', formatDate(profile.lastUpdated));
@@ -765,19 +893,51 @@
   contactMessage?.addEventListener("input", () => {
     contactMessageEdited = true;
     if (copyStatus) {
-      copyStatus.textContent = translate("copyReady");
+      copyStatus.textContent = getMissingLocationInput()
+        ? translate("copyMissingLocation")
+        : translate("copyReady");
     }
-    syncEmailLink();
+    syncContactRoute();
+  });
+
+  [contactOrigin, contactLocation].forEach((input) => {
+    input?.addEventListener("input", () => {
+      input.removeAttribute("aria-invalid");
+      if (!contactMessageEdited) {
+        syncContactMessage();
+      } else {
+        if (copyStatus) {
+          copyStatus.textContent = getMissingLocationInput()
+            ? translate("copyMissingLocation")
+            : translate("copyReady");
+        }
+        syncContactRoute();
+      }
+    });
   });
 
   copyMessageButton?.addEventListener("click", () => {
     void copyContactMessage();
   });
 
-  socialContactLinks.forEach((link) => {
-    link.addEventListener("click", () => {
+  contactAction?.addEventListener("click", (event) => {
+    if (!ensureLocationDetails()) {
+      event.preventDefault();
+      return;
+    }
+    if (contactRoutes[activeContactRoute]?.type === "social") {
       void copyContactMessage();
-    });
+    }
+  });
+
+  contactPrevious?.addEventListener("click", () => {
+    activeContactRoute = Math.max(0, activeContactRoute - 1);
+    syncContactRoute();
+  });
+
+  contactNext?.addEventListener("click", () => {
+    activeContactRoute = Math.min(contactRoutes.length - 1, activeContactRoute + 1);
+    syncContactRoute();
   });
 
   window
