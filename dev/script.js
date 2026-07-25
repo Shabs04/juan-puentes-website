@@ -9,8 +9,18 @@
   const contactMessage = document.querySelector("[data-contact-message]");
   const copyMessageButton = document.querySelector("[data-copy-message]");
   const copyStatus = document.querySelector("[data-copy-status]");
-  const socialContactLinks = document.querySelectorAll("[data-copy-before-open]");
-  const emailLink = document.querySelector("[data-email-link]");
+  const contactOrigin = document.querySelector("[data-contact-origin]");
+  const contactLocation = document.querySelector("[data-contact-location]");
+  const contactTimeZone = document.querySelector("[data-contact-timezone]");
+  const contactRouteStep = document.querySelector("[data-contact-route-step]");
+  const contactRouteName = document.querySelector("[data-contact-route-name]");
+  const contactRouteDescription = document.querySelector("[data-contact-route-description]");
+  const contactEmailAddress = document.querySelector("[data-contact-email-address]");
+  const contactAction = document.querySelector("[data-contact-action]");
+  const contactPrevious = document.querySelector("[data-contact-previous]");
+  const contactNext = document.querySelector("[data-contact-next]");
+  const publicContactEmail = "j.puentesb@hotmail.com";
+  const userTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone || "Local time";
 
   const translations = {
     en: {
@@ -84,29 +94,44 @@
       connectEyebrow: "Connect",
       connectTitle: "Send me a message.",
       connectIntro:
-        "Use the editable draft, then start with Instagram. TikTok is the second option, and email will be available for longer enquiries when I publish a contact address.",
+        "Tell me where you are from and where you are currently located, then use one contact channel. Start with Instagram and wait for a reply before trying TikTok or email.",
       messageDraftEyebrow: "Message draft",
       messageDraftTitle: "A friendly introduction",
+      messageLocationIntro:
+        "Add your origin and current location. Your browser time zone will be included automatically.",
+      contactOriginLabel: "Where are you from?",
+      contactOriginPlaceholder: "e.g. Bogotá, Colombia",
+      contactLocationLabel: "Where are you currently located?",
+      contactLocationPlaceholder: "e.g. Sydney, Australia",
+      contactTimezoneLabel: "Time zone included:",
       messageDraftLabel: "Edit your message before sending",
+      contactOriginFallback: "[where you are from]",
+      contactLocationFallback: "[where you currently live]",
       contactMessageText:
-        "Hi Juan, I found your website and would love to connect. I am interested in learning more about your long-term investing approach and the educational content you share. Thank you!",
+        "Hi Juan, I found your website and would love to connect. I am originally from {origin}, and I am currently located in {location}. My current time zone is {timeZone}. I am interested in learning more about your long-term investing approach and the educational content you share. Please let me know a suitable time to connect. Thank you!",
       copyReady: "Ready to copy",
       copyMessage: "Copy message",
       copySuccess: "Message copied. Paste it into your conversation.",
       copyError: "Select the message and copy it manually.",
-      contactChannelsEyebrow: "Where to send it",
-      contactChannelsTitle: "Message me on Instagram first.",
+      copyMissingLocation: "Add your origin and current location first.",
+      contactChannelsEyebrow: "One channel at a time",
+      contactChannelsTitle: "Start with Instagram.",
       contactChannelsText:
-        "Your message is copied when you open a social channel. Paste it into a direct message if my account allows messages.",
+        "Please use one option and wait for a reply. Move to the next only if the previous channel is unavailable.",
+      contactOptionLabel: "Option",
+      contactOptionOf: "of",
       contactInstagramText: "My preferred contact channel.",
-      contactTiktokText: "Message me on TikTok if Instagram is not available.",
+      contactTiktokText: "Use only if Instagram is unavailable.",
       contactEmailTitle: "Email",
-      contactEmailText: "Email me for longer enquiries.",
+      contactEmailText: "Use email only if neither social channel is available.",
       contactEmailSubject: "Website message",
       openInstagram: "Copy & open Instagram",
       openTiktok: "Copy & open TikTok",
       openEmail: "Open email",
       emailPending: "Public email needed",
+      contactPrevious: "Previous option",
+      contactTryTiktok: "Instagram unavailable? Try TikTok",
+      contactTryEmail: "TikTok unavailable? Try email",
       tiktokManualNote: "Reviewed public TikTok profile stats",
       navHome: "Home",
       bioReadMore: "Read more",
@@ -191,29 +216,44 @@
       connectEyebrow: "Conectar",
       connectTitle: "Env\u00edame un mensaje.",
       connectIntro:
-        "Usa el borrador editable y empieza por Instagram. TikTok es la segunda opci\u00f3n y el correo estar\u00e1 disponible para consultas m\u00e1s largas cuando publique una direcci\u00f3n de contacto.",
+        "Cu\u00e9ntame de d\u00f3nde eres y d\u00f3nde te encuentras actualmente. Usa un solo canal: empieza por Instagram y espera una respuesta antes de probar TikTok o correo.",
       messageDraftEyebrow: "Borrador del mensaje",
       messageDraftTitle: "Una presentaci\u00f3n amable",
+      messageLocationIntro:
+        "A\u00f1ade tu lugar de origen y tu ubicaci\u00f3n actual. La zona horaria de tu navegador se incluir\u00e1 autom\u00e1ticamente.",
+      contactOriginLabel: "\u00bfDe d\u00f3nde eres?",
+      contactOriginPlaceholder: "p. ej., Bogot\u00e1, Colombia",
+      contactLocationLabel: "\u00bfD\u00f3nde te encuentras actualmente?",
+      contactLocationPlaceholder: "p. ej., S\u00eddney, Australia",
+      contactTimezoneLabel: "Zona horaria incluida:",
       messageDraftLabel: "Edita tu mensaje antes de enviarlo",
+      contactOriginFallback: "[tu lugar de origen]",
+      contactLocationFallback: "[tu ubicaci\u00f3n actual]",
       contactMessageText:
-        "Hola Juan, encontr\u00e9 tu sitio web y me gustar\u00eda conectar contigo. Me interesa conocer m\u00e1s sobre tu enfoque de inversi\u00f3n a largo plazo y el contenido educativo que compartes. \u00a1Gracias!",
+        "Hola Juan, encontr\u00e9 tu sitio web y me gustar\u00eda conectar contigo. Soy de {origin} y actualmente estoy en {location}. Mi zona horaria actual es {timeZone}. Me interesa conocer m\u00e1s sobre tu enfoque de inversi\u00f3n a largo plazo y el contenido educativo que compartes. Por favor, dime qu\u00e9 horario te viene bien. \u00a1Gracias!",
       copyReady: "Listo para copiar",
       copyMessage: "Copiar mensaje",
       copySuccess: "Mensaje copiado. P\u00e9galo en tu conversaci\u00f3n.",
       copyError: "Selecciona el mensaje y c\u00f3pialo manualmente.",
-      contactChannelsEyebrow: "D\u00f3nde enviarlo",
-      contactChannelsTitle: "Escríbeme primero por Instagram.",
+      copyMissingLocation: "A\u00f1ade primero tu lugar de origen y tu ubicaci\u00f3n actual.",
+      contactChannelsEyebrow: "Un canal a la vez",
+      contactChannelsTitle: "Empieza por Instagram.",
       contactChannelsText:
-        "Tu mensaje se copia cuando abres una red social. P\u00e9galo en un mensaje directo si mi cuenta permite mensajes.",
+        "Usa una sola opci\u00f3n y espera una respuesta. Pasa a la siguiente solo si el canal anterior no est\u00e1 disponible.",
+      contactOptionLabel: "Opci\u00f3n",
+      contactOptionOf: "de",
       contactInstagramText: "Mi canal de contacto preferido.",
-      contactTiktokText: "Escríbeme por TikTok si Instagram no está disponible.",
+      contactTiktokText: "Usa TikTok solo si Instagram no est\u00e1 disponible.",
       contactEmailTitle: "Correo",
-      contactEmailText: "Escríbeme por correo para consultas más largas.",
+      contactEmailText: "Usa el correo solo si ninguna red social est\u00e1 disponible.",
       contactEmailSubject: "Mensaje desde el sitio web",
       openInstagram: "Copiar y abrir Instagram",
       openTiktok: "Copiar y abrir TikTok",
       openEmail: "Abrir correo",
       emailPending: "Falta el correo p\u00fablico",
+      contactPrevious: "Opci\u00f3n anterior",
+      contactTryTiktok: "\u00bfInstagram no est\u00e1 disponible? Prueba TikTok",
+      contactTryEmail: "\u00bfTikTok no est\u00e1 disponible? Prueba el correo",
       tiktokManualNote: "Estadísticas públicas revisadas de TikTok",
       navHome: "Inicio",
       bioReadMore: "Leer más",
@@ -257,44 +297,127 @@
   let activeLanguage = getInitialLanguage();
   let activeProfile = null;
   let contactMessageEdited = false;
+  let activeContactRoute = 0;
 
   const translate = (key) => translations[activeLanguage][key] || translations.en[key] || "";
   const getPageTitle = () => translate("pageTitle");
 
-  const syncEmailLink = () => {
-    if (!emailLink || !contactMessage) return;
-    const publicEmail = emailLink.dataset.contactEmail?.trim() || "";
-    const hasPublicEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(publicEmail);
+  const contactRoutes = [
+    {
+      name: "Instagram",
+      descriptionKey: "contactInstagramText",
+      actionKey: "openInstagram",
+      url: "https://www.instagram.com/juanpuentesb/",
+      type: "social",
+    },
+    {
+      name: "TikTok",
+      descriptionKey: "contactTiktokText",
+      actionKey: "openTiktok",
+      url: "https://www.tiktok.com/@juanpuentesb",
+      type: "social",
+    },
+    {
+      nameKey: "contactEmailTitle",
+      descriptionKey: "contactEmailText",
+      actionKey: "openEmail",
+      type: "email",
+    },
+  ];
 
-    if (!hasPublicEmail) {
-      emailLink.removeAttribute("href");
-      emailLink.setAttribute("aria-disabled", "true");
-      emailLink.textContent = translate("emailPending");
-      return;
+  const fillTemplate = (template, values) =>
+    Object.entries(values).reduce(
+      (result, [key, value]) => result.split(`{${key}}`).join(value),
+      template
+    );
+
+  const buildContactMessage = () =>
+    fillTemplate(translate("contactMessageText"), {
+      origin: contactOrigin?.value.trim() || translate("contactOriginFallback"),
+      location: contactLocation?.value.trim() || translate("contactLocationFallback"),
+      timeZone: userTimeZone,
+    });
+
+  const getMissingLocationInput = () =>
+    [contactOrigin, contactLocation].find((input) => input && !input.value.trim());
+
+  const ensureLocationDetails = () => {
+    const missingInput = getMissingLocationInput();
+    if (!missingInput) return true;
+
+    missingInput.setAttribute("aria-invalid", "true");
+    missingInput.focus();
+    if (copyStatus) {
+      copyStatus.textContent = translate("copyMissingLocation");
+    }
+    return false;
+  };
+
+  const syncContactRoute = () => {
+    const route = contactRoutes[activeContactRoute];
+    if (!route || !contactAction) return;
+
+    if (contactRouteStep) {
+      contactRouteStep.textContent = `${translate("contactOptionLabel")} ${activeContactRoute + 1} ${translate("contactOptionOf")} ${contactRoutes.length}`;
+    }
+    if (contactRouteName) {
+      contactRouteName.textContent = route.nameKey ? translate(route.nameKey) : route.name;
+    }
+    if (contactRouteDescription) {
+      contactRouteDescription.textContent = translate(route.descriptionKey);
     }
 
-    const params = new URLSearchParams({
-      subject: translate("contactEmailSubject"),
-      body: contactMessage.value.trim(),
-    });
-    emailLink.href = `mailto:${publicEmail}?${params.toString()}`;
-    emailLink.removeAttribute("aria-disabled");
-    emailLink.textContent = translate("openEmail");
+    const isEmail = route.type === "email";
+    if (contactEmailAddress) {
+      contactEmailAddress.hidden = !isEmail;
+      contactEmailAddress.href = `mailto:${publicContactEmail}`;
+      contactEmailAddress.textContent = publicContactEmail;
+    }
+
+    if (isEmail) {
+      const params = new URLSearchParams({
+        subject: translate("contactEmailSubject"),
+        body: contactMessage?.value.trim() || buildContactMessage(),
+      });
+      contactAction.href = `mailto:${publicContactEmail}?${params.toString()}`;
+      contactAction.removeAttribute("target");
+      contactAction.removeAttribute("rel");
+    } else {
+      contactAction.href = route.url;
+      contactAction.target = "_blank";
+      contactAction.rel = "noopener noreferrer";
+    }
+    contactAction.textContent = translate(route.actionKey);
+
+    if (contactPrevious) {
+      contactPrevious.hidden = activeContactRoute === 0;
+    }
+    if (contactNext) {
+      contactNext.hidden = activeContactRoute === contactRoutes.length - 1;
+      contactNext.textContent =
+        activeContactRoute === 0 ? translate("contactTryTiktok") : translate("contactTryEmail");
+    }
   };
 
   const syncContactMessage = () => {
     if (!contactMessage) return;
     if (!contactMessageEdited) {
-      contactMessage.value = translate("contactMessageText");
+      contactMessage.value = buildContactMessage();
+    }
+    if (contactTimeZone) {
+      contactTimeZone.textContent = userTimeZone;
     }
     if (copyStatus) {
-      copyStatus.textContent = translate("copyReady");
+      copyStatus.textContent = getMissingLocationInput()
+        ? translate("copyMissingLocation")
+        : translate("copyReady");
     }
-    syncEmailLink();
+    syncContactRoute();
   };
 
   const copyContactMessage = async () => {
     if (!contactMessage) return;
+    if (!ensureLocationDetails()) return;
     const message = contactMessage.value.trim();
     if (!message) return;
 
@@ -312,7 +435,6 @@
     }
   };
 
-  const userTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone || "Local time";
   const calendarHours = [14, 15, 16, 17, 18, 19, 20, 21];
   const slotTemplates = [
     { weekday: 1, hour: 16, minute: 0, duration: 30 },
@@ -621,6 +743,12 @@
         element.textContent = value;
       }
     });
+    document.querySelectorAll("[data-i18n-placeholder]").forEach((element) => {
+      const value = translate(element.dataset.i18nPlaceholder);
+      if (value) {
+        element.setAttribute("placeholder", value);
+      }
+    });
 
     languageButtons.forEach((button) => {
       button.setAttribute("aria-pressed", String(button.dataset.language === language));
@@ -765,19 +893,51 @@
   contactMessage?.addEventListener("input", () => {
     contactMessageEdited = true;
     if (copyStatus) {
-      copyStatus.textContent = translate("copyReady");
+      copyStatus.textContent = getMissingLocationInput()
+        ? translate("copyMissingLocation")
+        : translate("copyReady");
     }
-    syncEmailLink();
+    syncContactRoute();
+  });
+
+  [contactOrigin, contactLocation].forEach((input) => {
+    input?.addEventListener("input", () => {
+      input.removeAttribute("aria-invalid");
+      if (!contactMessageEdited) {
+        syncContactMessage();
+      } else {
+        if (copyStatus) {
+          copyStatus.textContent = getMissingLocationInput()
+            ? translate("copyMissingLocation")
+            : translate("copyReady");
+        }
+        syncContactRoute();
+      }
+    });
   });
 
   copyMessageButton?.addEventListener("click", () => {
     void copyContactMessage();
   });
 
-  socialContactLinks.forEach((link) => {
-    link.addEventListener("click", () => {
+  contactAction?.addEventListener("click", (event) => {
+    if (!ensureLocationDetails()) {
+      event.preventDefault();
+      return;
+    }
+    if (contactRoutes[activeContactRoute]?.type === "social") {
       void copyContactMessage();
-    });
+    }
+  });
+
+  contactPrevious?.addEventListener("click", () => {
+    activeContactRoute = Math.max(0, activeContactRoute - 1);
+    syncContactRoute();
+  });
+
+  contactNext?.addEventListener("click", () => {
+    activeContactRoute = Math.min(contactRoutes.length - 1, activeContactRoute + 1);
+    syncContactRoute();
   });
 
   window
