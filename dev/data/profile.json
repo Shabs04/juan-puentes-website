@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-07-25T11:16:41.286Z",
+  "lastUpdated": "2026-07-25T14:53:45.468Z",
   "etoro": {
     "displayName": "Juan Puentes Botero",
     "username": "Juanpuentesb",
@@ -17,20 +17,20 @@
     "strategy": "🔺 Long term investor\n🔺 ETF’s as a solid base\n🔺 Modern & forward thinking\n🔺 DCA"
   },
   "instagram": {
-    "followers": "3,821",
-    "posts": "204",
+    "followers": "",
+    "posts": "",
     "aumDisplay": "$840k+ AUM",
     "socialProofDetail": "Updated from Juan's public Instagram profile metadata.",
     "summary": "3,821 followers / 204 posts"
   },
   "tiktok": {
-    "following": "140",
-    "followers": "1,819",
-    "likes": "9,669",
-    "summary": "140 following / 1,819 followers / 9,669 likes",
-    "sourceNote": "Automated TikTok refresh was blocked; retaining last known public stats.",
+    "following": "141",
+    "followers": "1,954",
+    "likes": "10,900",
+    "summary": "141 following / 1,954 followers / 10,900 likes",
+    "sourceNote": "Updated from Juan's public TikTok profile page.",
     "title": "Juan Puentes on TikTok",
-    "isBlocked": true
+    "isBlocked": false
   },
   "sources": {
     "etoro": "https://www.etoro.com/api/logininfo/v1.1/users/juanpuentesb",

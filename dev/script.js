@@ -31,6 +31,7 @@
       skipLink: "Skip to content",
       brandRole: "eToro Popular Investor",
       navPersona: "About me",
+      navBook: "My book",
       navStrategy: "Strategy",
       navConnect: "Connect",
       navStartEtoro: "Start on eToro",
@@ -136,6 +137,16 @@
       navHome: "Home",
       bioReadMore: "Read more",
       bioShowLess: "Show less",
+      bookEyebrow: "My book",
+      bookLanguage: "Spanish e-book",
+      bookCoverAlt: "Cover of Así empecé a invertir by Juan Puentes Botero",
+      bookIntro:
+        "In this Spanish-language e-book, I share how I began investing and the principles I use to build a long-term portfolio from the ground up.",
+      bookTopicOne: "Understand the stock market, investing risk, and diversification.",
+      bookTopicTwo: "Explore index funds, compound interest, fees, and taxes.",
+      bookTopicThree: "Learn the 4% rule and the thinking behind my investment strategy.",
+      bookCta: "Explore the e-book",
+      bookNote: "Opens my Gumroad book page in a new tab.",
       riskTitle: "Risk note",
       riskText:
         "This website shares my public profile. It is not financial advice, an offer to buy or sell financial products, or an official eToro website. Copy trading and investing involve risk, including possible loss of capital. Past performance does not guarantee future results. Always verify details directly on eToro and consider your own circumstances.",
@@ -153,6 +164,7 @@
       skipLink: "Saltar al contenido",
       brandRole: "Inversionista Popular en eToro",
       navPersona: "Sobre mí",
+      navBook: "Mi libro",
       navStrategy: "Estrategia",
       navConnect: "Conectar",
       navStartEtoro: "Empezar en eToro",
@@ -258,6 +270,16 @@
       navHome: "Inicio",
       bioReadMore: "Leer más",
       bioShowLess: "Mostrar menos",
+      bookEyebrow: "Mi libro",
+      bookLanguage: "E-book en español",
+      bookCoverAlt: "Portada de Así empecé a invertir, de Juan Puentes Botero",
+      bookIntro:
+        "En este e-book en español, comparto cómo empecé a invertir y los principios que uso para construir un portafolio de largo plazo desde cero.",
+      bookTopicOne: "Entiende la bolsa de valores, el riesgo de invertir y la diversificación.",
+      bookTopicTwo: "Explora los fondos indexados, el interés compuesto, las comisiones y los impuestos.",
+      bookTopicThree: "Conoce la regla del 4% y las ideas detrás de mi estrategia de inversión.",
+      bookCta: "Ver el e-book",
+      bookNote: "Abre la página de mi libro en Gumroad en una pestaña nueva.",
       riskTitle: "Nota de riesgo",
       riskText:
         "Este sitio comparte mi perfil público. No es asesoría financiera, una oferta para comprar o vender productos financieros ni un sitio oficial de eToro. El copy trading y la inversión implican riesgo, incluida la posible pérdida de capital. El rendimiento pasado no garantiza resultados futuros. Verifica siempre los detalles directamente en eToro y considera tus propias circunstancias.",
@@ -749,6 +771,12 @@
         element.setAttribute("placeholder", value);
       }
     });
+    document.querySelectorAll("[data-i18n-alt]").forEach((element) => {
+      const value = translate(element.dataset.i18nAlt);
+      if (value) {
+        element.setAttribute("alt", value);
+      }
+    });
 
     languageButtons.forEach((button) => {
       button.setAttribute("aria-pressed", String(button.dataset.language === language));
@@ -851,11 +879,12 @@
     });
   });
 
-  const spySections = ["persona", "strategy", "connect"]
+  const spySections = ["persona", "book", "strategy", "connect"]
     .map((id) => document.getElementById(id))
     .filter(Boolean);
 
   if (spySections.length) {
+    const navOffset = Math.ceil(header?.getBoundingClientRect().height || 80) + 8;
     const scrollSpy = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -868,7 +897,7 @@
           }
         });
       },
-      { rootMargin: "-80px 0px -55% 0px", threshold: 0 }
+      { rootMargin: `-${navOffset}px 0px -55% 0px`, threshold: 0 }
     );
     spySections.forEach((el) => scrollSpy.observe(el));
   }
