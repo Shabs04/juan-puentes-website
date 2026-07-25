@@ -156,7 +156,7 @@
       snapshotStyleTitle: "DCA moderno",
       snapshotStyleText: "Una mentalidad de acumulación constante en lugar de ruido de corto plazo.",
       personaEyebrow: "Persona inversionista",
-      personaTitle: "Calmo, directo y pensado para quienes quieren jugar a largo plazo.",
+      personaTitle: "Equilibrado, directo y pensado para quienes quieren jugar a largo plazo.",
       personaIntro:
         "El tono es simple: estamos invirtiendo, no apostando. La persona debe sentirse cercana, bilingüe, aterrizada y segura, sin prometer resultados.",
       personaCardOneTitle: "Claridad cotidiana",
