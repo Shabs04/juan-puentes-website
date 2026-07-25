@@ -18,8 +18,8 @@
     <title>Juan Puentes | Long-Term Investor</title>
     <link rel="canonical" href="https://juanpuentesb.github.io/">
     <link rel="icon" href="favicon.svg" type="image/svg+xml">
-    <link rel="stylesheet" href="styles.css?v=20260525-full-bio-refresh">
-    <script defer src="script.js?v=20260525-full-bio-refresh"></script>
+    <link rel="stylesheet" href="styles.css?v=20260725-contact-flow">
+    <script defer src="script.js?v=20260725-bilingual-bio"></script>
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -53,7 +53,6 @@
           <a href="#persona" data-i18n="navPersona">Persona</a>
           <a href="#strategy" data-i18n="navStrategy">Strategy</a>
           <a href="#connect" data-i18n="navConnect">Connect</a>
-          <a href="booking.html" data-i18n="navBook">Book time</a>
           <a
             class="nav-start"
             href="https://med.etoro.com/B22186_A126231_TClick_Sjuanpuentesb.aspx"
@@ -280,25 +279,83 @@
       <section class="section" id="connect" aria-labelledby="connect-title">
         <div class="section-header">
           <p class="eyebrow" data-i18n="connectEyebrow">Connect</p>
-          <h2 id="connect-title" data-i18n="connectTitle">One identity across eToro, Instagram, and TikTok.</h2>
+          <h2 id="connect-title" data-i18n="connectTitle">Send Juan a message.</h2>
+          <p data-i18n="connectIntro">
+            Use the editable draft, then start with Instagram. TikTok is the second option and email
+            is available for longer enquiries once Juan publishes a contact address.
+          </p>
         </div>
 
-        <div class="social-grid">
-          <a class="social-card" href="https://www.etoro.com/people/juanpuentesb" target="_blank" rel="noopener noreferrer">
-            <span class="social-name">eToro</span>
-            <strong>@Juanpuentesb</strong>
-            <span class="social-action" data-i18n="socialEtoro">Profile, portfolio, stats</span>
-          </a>
-          <a class="social-card" href="https://www.instagram.com/juanpuentesb/" target="_blank" rel="noopener noreferrer">
-            <span class="social-name">Instagram</span>
-            <strong>@juanpuentesb</strong>
-            <span class="social-action" data-i18n="socialInstagram" data-profile="instagramSummary">Education and journey</span>
-          </a>
-          <a class="social-card" href="https://www.tiktok.com/@juanpuentesb" target="_blank" rel="noopener noreferrer">
-            <span class="social-name">TikTok</span>
-            <strong>@juanpuentesb</strong>
-            <span class="social-action" data-i18n="socialTiktok" data-profile="tiktokSummary">Short-form insights</span>
-          </a>
+        <div class="contact-layout">
+          <div class="message-composer">
+            <p class="eyebrow" data-i18n="messageDraftEyebrow">Message draft</p>
+            <h3 data-i18n="messageDraftTitle">A friendly introduction</h3>
+            <label for="contact-message" data-i18n="messageDraftLabel">Edit your message before sending</label>
+            <textarea id="contact-message" class="contact-message" rows="7" data-contact-message></textarea>
+            <div class="composer-footer">
+              <span class="copy-status" role="status" aria-live="polite" data-copy-status data-i18n="copyReady">
+                Ready to copy
+              </span>
+              <button class="button button-primary contact-copy" type="button" data-copy-message data-i18n="copyMessage">
+                Copy message
+              </button>
+            </div>
+          </div>
+
+          <div class="contact-channels">
+            <p class="eyebrow" data-i18n="contactChannelsEyebrow">Where to send it</p>
+            <h3 data-i18n="contactChannelsTitle">Start with Instagram.</h3>
+            <p data-i18n="contactChannelsText">
+              Your message is copied when you open a social channel. Paste it into a direct message
+              if Juan's account allows messages.
+            </p>
+            <ol class="channel-list">
+              <li class="channel-item channel-primary">
+                <span class="channel-rank" aria-hidden="true">1</span>
+                <span class="channel-copy">
+                  <strong>Instagram</strong>
+                  <span data-i18n="contactInstagramText">Juan's preferred contact channel.</span>
+                </span>
+                <a
+                  class="button button-primary channel-link"
+                  href="https://www.instagram.com/juanpuentesb/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  data-copy-before-open
+                  data-i18n="openInstagram"
+                >Copy &amp; open Instagram</a>
+              </li>
+              <li class="channel-item">
+                <span class="channel-rank" aria-hidden="true">2</span>
+                <span class="channel-copy">
+                  <strong>TikTok</strong>
+                  <span data-i18n="contactTiktokText">Use TikTok if Instagram is not available.</span>
+                </span>
+                <a
+                  class="button button-secondary channel-link"
+                  href="https://www.tiktok.com/@juanpuentesb"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  data-copy-before-open
+                  data-i18n="openTiktok"
+                >Copy &amp; open TikTok</a>
+              </li>
+              <li class="channel-item is-disabled">
+                <span class="channel-rank" aria-hidden="true">3</span>
+                <span class="channel-copy">
+                  <strong data-i18n="contactEmailTitle">Email</strong>
+                  <span data-i18n="contactEmailText">Best for longer enquiries.</span>
+                </span>
+                <a
+                  class="button button-secondary channel-link"
+                  data-email-link
+                  data-contact-email=""
+                  aria-disabled="true"
+                  data-i18n="emailPending"
+                >Public email needed</a>
+              </li>
+            </ol>
+          </div>
         </div>
       </section>
 

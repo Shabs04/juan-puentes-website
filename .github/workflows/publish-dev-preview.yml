@@ -9,6 +9,10 @@ on:
 permissions:
   contents: write
 
+concurrency:
+  group: site-main-writes
+  cancel-in-progress: false
+
 jobs:
   publish-dev-preview:
     runs-on: ubuntu-latest
