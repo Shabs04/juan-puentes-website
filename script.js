@@ -6,28 +6,15 @@
   const themeMeta = document.querySelector('meta[name="theme-color"]');
   const themeStorageKey = "juan-puentes-theme";
   const languageStorageKey = "juan-puentes-language";
-  const pageName = document.body.dataset.page || "home";
-  const bookingLink = document.querySelector("[data-booking-link]");
-  const officialBookingLink = document.querySelector("[data-official-booking-link]");
-  const bookingFrame = document.querySelector("[data-booking-frame]");
-  const bookingPlaceholder = document.querySelector("[data-booking-placeholder]");
-  const calendarGrid = document.querySelector("[data-calendar-grid]");
-  const weekLabel = document.querySelector("[data-week-label]");
-  const weekRelativeLabel = document.querySelector("[data-week-relative]");
-  const timezoneLabel = document.querySelector("[data-timezone-label]");
-  const selectedSlotText = document.querySelector("[data-selected-slot]");
-  const googleEventLink = document.querySelector("[data-google-event-link]");
-  const icsLink = document.querySelector("[data-ics-link]");
-  const weekButtons = document.querySelectorAll("[data-week-action]");
-  const bookingUrl = bookingLink?.dataset.bookingUrl?.trim() || "";
-  const hasBookingUrl =
-    /^https:\/\/(calendar\.google\.com\/calendar\/(?:u\/\d+\/)?appointments\/|calendar\.app\.google\/)/i.test(bookingUrl) &&
-    !bookingUrl.toLowerCase().includes("replace");
+  const contactMessage = document.querySelector("[data-contact-message]");
+  const copyMessageButton = document.querySelector("[data-copy-message]");
+  const copyStatus = document.querySelector("[data-copy-status]");
+  const socialContactLinks = document.querySelectorAll("[data-copy-before-open]");
+  const emailLink = document.querySelector("[data-email-link]");
 
   const translations = {
     en: {
       pageTitle: "Juan Puentes | Long-Term Investor",
-      bookingPageTitle: "Book Time With Juan Puentes",
       themeLabel: "Theme",
       themeToDark: "Switch to dark theme",
       themeToLight: "Switch to light theme",
@@ -36,7 +23,6 @@
       navPersona: "About Juan",
       navStrategy: "Strategy",
       navConnect: "Connect",
-      navBook: "Book time",
       navStartEtoro: "Start on eToro",
       heroEyebrow: "Public investor profile",
       heroTitle: "Long-term investing, built with discipline.",
@@ -96,53 +82,35 @@
       quoteText:
         "To have things you have never had, you have to do things you have never done. For Juan's brand, that means patient action, education, and discipline over shortcuts.",
       connectEyebrow: "Connect",
-      connectTitle: "One identity across eToro, Instagram, and TikTok.",
+      connectTitle: "Send Juan a message.",
       connectIntro:
-        "Each link opens the public profile directly. The eToro page should remain the source of truth for investment performance and copy-trading decisions.",
-      socialEtoro: "Profile, portfolio, stats",
-      socialInstagram: "Education and journey",
-      socialTiktok: "Short-form insights",
+        "Use the editable draft, then start with Instagram. TikTok is the second option and email is available for longer enquiries once Juan publishes a contact address.",
+      messageDraftEyebrow: "Message draft",
+      messageDraftTitle: "A friendly introduction",
+      messageDraftLabel: "Edit your message before sending",
+      contactMessageText:
+        "Hi Juan, I found your website and would love to connect. I am interested in learning more about your long-term investing approach and the educational content you share. Thank you!",
+      copyReady: "Ready to copy",
+      copyMessage: "Copy message",
+      copySuccess: "Message copied. Paste it into your conversation.",
+      copyError: "Select the message and copy it manually.",
+      contactChannelsEyebrow: "Where to send it",
+      contactChannelsTitle: "Start with Instagram.",
+      contactChannelsText:
+        "Your message is copied when you open a social channel. Paste it into a direct message if Juan's account allows messages.",
+      contactInstagramText: "Juan's preferred contact channel.",
+      contactTiktokText: "Use TikTok if Instagram is not available.",
+      contactEmailTitle: "Email",
+      contactEmailText: "Best for longer enquiries.",
+      contactEmailSubject: "Message from Juan's website",
+      openInstagram: "Copy & open Instagram",
+      openTiktok: "Copy & open TikTok",
+      openEmail: "Open email",
+      emailPending: "Public email needed",
       tiktokManualNote: "Reviewed public TikTok profile stats",
       navHome: "Home",
       bioReadMore: "Read more",
       bioShowLess: "Show less",
-      bookingEyebrow: "Book time",
-      bookingTitle: "Book a Google Meet with Juan.",
-      bookingLede:
-        "Choose an available time from Juan's calendar. The booking flow handles time zones and sends the Google Meet details after the appointment is confirmed.",
-      bookingPendingButton: "Calendar link pending",
-      bookingOpen: "Open booking calendar",
-      bookingBackHome: "Back to home",
-      bookingCardTitle: "Google Meet appointment",
-      bookingFactFormat: "Format",
-      bookingFactFormatValue: "Google Meet",
-      bookingFactAvailability: "Availability",
-      bookingFactAvailabilityValue: "Calendar-based",
-      bookingFactTimezone: "Time zone",
-      bookingFactTimezoneValue: "Shown locally",
-      bookingCalendarEyebrow: "Calendar",
-      bookingCalendarTitle: "Choose a preferred meeting window.",
-      bookingCurrentWeek: "Current week",
-      bookingRelativeThisWeek: "This week",
-      bookingRelativeNextWeek: "Next week",
-      bookingRelativeInWeeks: "In {count} weeks",
-      bookingRelativePreviousWeek: "Previous week",
-      bookingRelativeWeeksAgo: "{count} weeks ago",
-      bookingWorkWeek: "Work week",
-      bookingCalendarReady: "Google / iOS ready",
-      bookingTimeZone: "Time zone",
-      bookingGridFallback: "Calendar loading",
-      bookingSelectedEyebrow: "Selected time",
-      bookingSelectedTitle: "Pick a time on the calendar.",
-      bookingNoSlot: "Choose a slot to prepare Google Calendar and Apple Calendar options.",
-      bookingOfficialPending: "Official link pending",
-      bookingGoogleHold: "Add to Google Calendar",
-      bookingAppleHold: "Apple Calendar .ics",
-      bookingSlotNote:
-        "Calendar holds are for your device only. Juan's real availability and Google Meet details are confirmed through the official Google booking page once connected.",
-      bookingPlaceholderTitle: "Google Calendar booking link needed",
-      bookingPlaceholderText:
-        "Add Juan's Google Calendar appointment schedule link to activate live availability and Google Meet confirmation.",
       riskTitle: "Risk note",
       riskText:
         "This is an independent profile website concept based on public profile information. It is not financial advice, not an offer to buy or sell financial products, and not an official eToro website. Copy trading and investing involve risk, including possible loss of capital. Past performance does not guarantee future results. Always verify details directly on eToro and consider your own circumstances.",
@@ -154,7 +122,6 @@
     },
     es: {
       pageTitle: "Juan Puentes | Inversionista a Largo Plazo",
-      bookingPageTitle: "Reservar Tiempo Con Juan Puentes",
       themeLabel: "Tema",
       themeToDark: "Cambiar a tema oscuro",
       themeToLight: "Cambiar a tema claro",
@@ -163,7 +130,6 @@
       navPersona: "Sobre Juan",
       navStrategy: "Estrategia",
       navConnect: "Conectar",
-      navBook: "Reservar",
       navStartEtoro: "Empezar en eToro",
       heroEyebrow: "Perfil público de inversionista",
       heroTitle: "Inversión a largo plazo, construida con disciplina.",
@@ -223,53 +189,35 @@
       quoteText:
         "Para tener cosas que nunca has tenido, tienes que hacer cosas que nunca has hecho. Para la marca de Juan, eso significa acción paciente, educación y disciplina por encima de los atajos.",
       connectEyebrow: "Conectar",
-      connectTitle: "Una sola identidad en eToro, Instagram y TikTok.",
+      connectTitle: "Env\u00edale un mensaje a Juan.",
       connectIntro:
-        "Cada enlace abre directamente el perfil público. La página de eToro debe seguir siendo la fuente principal para rendimiento y decisiones de copy trading.",
-      socialEtoro: "Perfil, portafolio, estadísticas",
-      socialInstagram: "Educación y camino",
-      socialTiktok: "Ideas en formato corto",
+        "Usa el borrador editable y empieza por Instagram. TikTok es la segunda opci\u00f3n y el correo estar\u00e1 disponible para consultas m\u00e1s largas cuando Juan publique una direcci\u00f3n de contacto.",
+      messageDraftEyebrow: "Borrador del mensaje",
+      messageDraftTitle: "Una presentaci\u00f3n amable",
+      messageDraftLabel: "Edita tu mensaje antes de enviarlo",
+      contactMessageText:
+        "Hola Juan, encontr\u00e9 tu sitio web y me gustar\u00eda conectar contigo. Me interesa conocer m\u00e1s sobre tu enfoque de inversi\u00f3n a largo plazo y el contenido educativo que compartes. \u00a1Gracias!",
+      copyReady: "Listo para copiar",
+      copyMessage: "Copiar mensaje",
+      copySuccess: "Mensaje copiado. P\u00e9galo en tu conversaci\u00f3n.",
+      copyError: "Selecciona el mensaje y c\u00f3pialo manualmente.",
+      contactChannelsEyebrow: "D\u00f3nde enviarlo",
+      contactChannelsTitle: "Empieza por Instagram.",
+      contactChannelsText:
+        "Tu mensaje se copia cuando abres una red social. P\u00e9galo en un mensaje directo si la cuenta de Juan permite mensajes.",
+      contactInstagramText: "El canal de contacto preferido de Juan.",
+      contactTiktokText: "Usa TikTok si Instagram no est\u00e1 disponible.",
+      contactEmailTitle: "Correo",
+      contactEmailText: "La mejor opci\u00f3n para consultas m\u00e1s largas.",
+      contactEmailSubject: "Mensaje desde el sitio web de Juan",
+      openInstagram: "Copiar y abrir Instagram",
+      openTiktok: "Copiar y abrir TikTok",
+      openEmail: "Abrir correo",
+      emailPending: "Falta el correo p\u00fablico",
       tiktokManualNote: "Estadísticas públicas revisadas de TikTok",
       navHome: "Inicio",
       bioReadMore: "Leer más",
       bioShowLess: "Mostrar menos",
-      bookingEyebrow: "Reservar",
-      bookingTitle: "Reserva un Google Meet con Juan.",
-      bookingLede:
-        "Elige un horario disponible en el calendario de Juan. El flujo de reserva maneja zonas horarias y env\u00eda los detalles de Google Meet cuando se confirma la cita.",
-      bookingPendingButton: "Enlace de calendario pendiente",
-      bookingOpen: "Abrir calendario de reservas",
-      bookingBackHome: "Volver al inicio",
-      bookingCardTitle: "Cita por Google Meet",
-      bookingFactFormat: "Formato",
-      bookingFactFormatValue: "Google Meet",
-      bookingFactAvailability: "Disponibilidad",
-      bookingFactAvailabilityValue: "Seg\u00fan calendario",
-      bookingFactTimezone: "Zona horaria",
-      bookingFactTimezoneValue: "Mostrada localmente",
-      bookingCalendarEyebrow: "Calendario",
-      bookingCalendarTitle: "Elige una ventana de reuni\u00f3n preferida.",
-      bookingCurrentWeek: "Semana actual",
-      bookingRelativeThisWeek: "Esta semana",
-      bookingRelativeNextWeek: "Pr\u00f3xima semana",
-      bookingRelativeInWeeks: "En {count} semanas",
-      bookingRelativePreviousWeek: "Semana anterior",
-      bookingRelativeWeeksAgo: "Hace {count} semanas",
-      bookingWorkWeek: "Semana laboral",
-      bookingCalendarReady: "Listo para Google / iOS",
-      bookingTimeZone: "Zona horaria",
-      bookingGridFallback: "Cargando calendario",
-      bookingSelectedEyebrow: "Hora seleccionada",
-      bookingSelectedTitle: "Elige una hora en el calendario.",
-      bookingNoSlot: "Elige un horario para preparar opciones de Google Calendar y Apple Calendar.",
-      bookingOfficialPending: "Enlace oficial pendiente",
-      bookingGoogleHold: "Agregar a Google Calendar",
-      bookingAppleHold: "Apple Calendar .ics",
-      bookingSlotNote:
-        "Los recordatorios de calendario son solo para tu dispositivo. La disponibilidad real de Juan y los detalles de Google Meet se confirman en la p\u00e1gina oficial de reservas cuando est\u00e9 conectada.",
-      bookingPlaceholderTitle: "Falta el enlace de reservas de Google Calendar",
-      bookingPlaceholderText:
-        "Agrega el enlace de reservas de Google Calendar de Juan para activar disponibilidad en vivo y confirmaci\u00f3n por Google Meet.",
       riskTitle: "Nota de riesgo",
       riskText:
         "Este es un concepto independiente de sitio web basado en información pública del perfil. No es asesoría financiera, no es una oferta para comprar o vender productos financieros y no es un sitio oficial de eToro. El copy trading y la inversión implican riesgo, incluida la posible pérdida de capital. El rendimiento pasado no garantiza resultados futuros. Verifica siempre los detalles directamente en eToro y considera tus propias circunstancias.",
@@ -308,9 +256,62 @@
 
   let activeLanguage = getInitialLanguage();
   let activeProfile = null;
+  let contactMessageEdited = false;
 
   const translate = (key) => translations[activeLanguage][key] || translations.en[key] || "";
-  const getPageTitle = () => (pageName === "booking" ? translate("bookingPageTitle") : translate("pageTitle"));
+  const getPageTitle = () => translate("pageTitle");
+
+  const syncEmailLink = () => {
+    if (!emailLink || !contactMessage) return;
+    const publicEmail = emailLink.dataset.contactEmail?.trim() || "";
+    const hasPublicEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(publicEmail);
+
+    if (!hasPublicEmail) {
+      emailLink.removeAttribute("href");
+      emailLink.setAttribute("aria-disabled", "true");
+      emailLink.textContent = translate("emailPending");
+      return;
+    }
+
+    const params = new URLSearchParams({
+      subject: translate("contactEmailSubject"),
+      body: contactMessage.value.trim(),
+    });
+    emailLink.href = `mailto:${publicEmail}?${params.toString()}`;
+    emailLink.removeAttribute("aria-disabled");
+    emailLink.textContent = translate("openEmail");
+  };
+
+  const syncContactMessage = () => {
+    if (!contactMessage) return;
+    if (!contactMessageEdited) {
+      contactMessage.value = translate("contactMessageText");
+    }
+    if (copyStatus) {
+      copyStatus.textContent = translate("copyReady");
+    }
+    syncEmailLink();
+  };
+
+  const copyContactMessage = async () => {
+    if (!contactMessage) return;
+    const message = contactMessage.value.trim();
+    if (!message) return;
+
+    try {
+      await navigator.clipboard.writeText(message);
+      if (copyStatus) {
+        copyStatus.textContent = translate("copySuccess");
+      }
+    } catch {
+      contactMessage.focus();
+      contactMessage.select();
+      if (copyStatus) {
+        copyStatus.textContent = translate("copyError");
+      }
+    }
+  };
+
   const userTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone || "Local time";
   const calendarHours = [14, 15, 16, 17, 18, 19, 20, 21];
   const slotTemplates = [
@@ -626,9 +627,8 @@
     });
 
     syncThemeButton();
-    syncBookingWidget();
     syncBioToggleText();
-    renderScheduler();
+    syncContactMessage();
     applyProfileData(activeProfile);
     if (persist) {
       storeValue(languageStorageKey, language);
@@ -757,18 +757,21 @@
     });
   });
 
-  weekButtons.forEach((button) => {
-    button.addEventListener("click", () => {
-      const action = button.dataset.weekAction;
-      if (action === "previous") {
-        visibleWeekStart = addDays(visibleWeekStart || getWeekStart(new Date()), -7);
-      } else if (action === "next") {
-        visibleWeekStart = addDays(visibleWeekStart || getWeekStart(new Date()), 7);
-      } else {
-        visibleWeekStart = getWeekStart(new Date());
-      }
-      selectedSlot = null;
-      renderScheduler();
+  contactMessage?.addEventListener("input", () => {
+    contactMessageEdited = true;
+    if (copyStatus) {
+      copyStatus.textContent = translate("copyReady");
+    }
+    syncEmailLink();
+  });
+
+  copyMessageButton?.addEventListener("click", () => {
+    void copyContactMessage();
+  });
+
+  socialContactLinks.forEach((link) => {
+    link.addEventListener("click", () => {
+      void copyContactMessage();
     });
   });
 
