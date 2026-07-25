@@ -140,6 +140,10 @@ const getEtoroData = async () => {
       .split("-")[0]
       .toLowerCase();
 
+    const fullBio = about || BASELINE.etoro.fullBio;
+    const fullBioTranslations =
+      fullBio === BASELINE.etoro.fullBio ? BASELINE.etoro.fullBioTranslations || {} : {};
+
     return {
       displayName: cleanText(`${profile.firstName || "Juan"} ${profile.lastName || "Puentes Botero"}`),
       username: cleanText(profile.username || BASELINE.etoro.username),
@@ -149,7 +153,8 @@ const getEtoroData = async () => {
       isVerified: Boolean(profile.isVerified),
       isPopularInvestor: Boolean(profile.isPi),
       shortBio: aboutShort || BASELINE.etoro.shortBio,
-      fullBio: about || BASELINE.etoro.fullBio,
+      fullBio,
+      fullBioTranslations,
       bioLanguage: bioLanguage || BASELINE.etoro.bioLanguage,
       strategy: aboutShort || BASELINE.etoro.strategy,
     };

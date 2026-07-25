@@ -676,7 +676,12 @@
     setText('[data-profile="instagramSummary"]', instagram.summary);
     setText('[data-profile="tiktokSummary"]', tiktok.summary);
     setText('[data-profile="lastUpdated"]', formatDate(profile.lastUpdated));
-    setSourceText('[data-profile="etoroFullBio"]', etoro.fullBio, etoro.bioLanguage);
+    const translatedBio = etoro.fullBioTranslations?.[activeLanguage];
+    setSourceText(
+      '[data-profile="etoroFullBio"]',
+      translatedBio || etoro.fullBio,
+      translatedBio ? activeLanguage : etoro.bioLanguage
+    );
 
     if (etoro.avatarUrl) {
       document.querySelectorAll("[data-profile-image='avatar']").forEach((image) => {
