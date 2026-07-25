@@ -18,8 +18,8 @@
     <title>Juan Puentes | Long-Term Investor</title>
     <link rel="canonical" href="https://juanpuentesb.github.io/">
     <link rel="icon" href="favicon.svg" type="image/svg+xml">
-    <link rel="stylesheet" href="styles.css?v=20260725-contact-flow">
-    <script defer src="script.js?v=20260725-first-person"></script>
+    <link rel="stylesheet" href="styles.css?v=20260725-single-contact">
+    <script defer src="script.js?v=20260725-single-contact"></script>
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -279,8 +279,8 @@
           <p class="eyebrow" data-i18n="connectEyebrow">Connect</p>
           <h2 id="connect-title" data-i18n="connectTitle">Send me a message.</h2>
           <p data-i18n="connectIntro">
-            Use the editable draft, then start with Instagram. TikTok is the second option, and email
-            will be available for longer enquiries when I publish a contact address.
+            Tell me where you are from and where you are currently located, then use one contact
+            channel. Start with Instagram and wait for a reply before trying TikTok or email.
           </p>
         </div>
 
@@ -288,6 +288,41 @@
           <div class="message-composer">
             <p class="eyebrow" data-i18n="messageDraftEyebrow">Message draft</p>
             <h3 data-i18n="messageDraftTitle">A friendly introduction</h3>
+            <p class="message-location-intro" data-i18n="messageLocationIntro">
+              Add your origin and current location. Your browser time zone will be included automatically.
+            </p>
+            <div class="location-fields">
+              <div class="location-field">
+                <label for="contact-origin" data-i18n="contactOriginLabel">Where are you from?</label>
+                <input
+                  id="contact-origin"
+                  class="contact-input"
+                  type="text"
+                  autocomplete="country-name"
+                  placeholder="e.g. Bogotá, Colombia"
+                  required
+                  data-contact-origin
+                  data-i18n-placeholder="contactOriginPlaceholder"
+                >
+              </div>
+              <div class="location-field">
+                <label for="contact-location" data-i18n="contactLocationLabel">Where are you currently located?</label>
+                <input
+                  id="contact-location"
+                  class="contact-input"
+                  type="text"
+                  autocomplete="address-level2"
+                  placeholder="e.g. Sydney, Australia"
+                  required
+                  data-contact-location
+                  data-i18n-placeholder="contactLocationPlaceholder"
+                >
+              </div>
+              <p class="contact-timezone">
+                <span data-i18n="contactTimezoneLabel">Time zone included:</span>
+                <strong data-contact-timezone>Australia/Sydney</strong>
+              </p>
+            </div>
             <label for="contact-message" data-i18n="messageDraftLabel">Edit your message before sending</label>
             <textarea id="contact-message" class="contact-message" rows="7" data-contact-message></textarea>
             <div class="composer-footer">
@@ -300,59 +335,44 @@
             </div>
           </div>
 
-          <div class="contact-channels">
-            <p class="eyebrow" data-i18n="contactChannelsEyebrow">Where to send it</p>
-            <h3 data-i18n="contactChannelsTitle">Message me on Instagram first.</h3>
+          <div class="contact-channels" data-contact-router>
+            <p class="eyebrow" data-i18n="contactChannelsEyebrow">One channel at a time</p>
+            <h3 data-i18n="contactChannelsTitle">Start with Instagram.</h3>
             <p data-i18n="contactChannelsText">
-              Your message is copied when you open a social channel. Paste it into a direct message
-              if my account allows messages.
+              Please use one option and wait for a reply. Move to the next only if the previous
+              channel is unavailable.
             </p>
-            <ol class="channel-list">
-              <li class="channel-item channel-primary">
-                <span class="channel-rank" aria-hidden="true">1</span>
-                <span class="channel-copy">
-                  <strong>Instagram</strong>
-                  <span data-i18n="contactInstagramText">My preferred contact channel.</span>
-                </span>
-                <a
-                  class="button button-primary channel-link"
-                  href="https://www.instagram.com/juanpuentesb/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  data-copy-before-open
-                  data-i18n="openInstagram"
-                >Copy &amp; open Instagram</a>
-              </li>
-              <li class="channel-item">
-                <span class="channel-rank" aria-hidden="true">2</span>
-                <span class="channel-copy">
-                  <strong>TikTok</strong>
-                  <span data-i18n="contactTiktokText">Message me on TikTok if Instagram is not available.</span>
-                </span>
-                <a
-                  class="button button-secondary channel-link"
-                  href="https://www.tiktok.com/@juanpuentesb"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  data-copy-before-open
-                  data-i18n="openTiktok"
-                >Copy &amp; open TikTok</a>
-              </li>
-              <li class="channel-item is-disabled">
-                <span class="channel-rank" aria-hidden="true">3</span>
-                <span class="channel-copy">
-                  <strong data-i18n="contactEmailTitle">Email</strong>
-                  <span data-i18n="contactEmailText">Email me for longer enquiries.</span>
-                </span>
-                <a
-                  class="button button-secondary channel-link"
-                  data-email-link
-                  data-contact-email=""
-                  aria-disabled="true"
-                  data-i18n="emailPending"
-                >Public email needed</a>
-              </li>
-            </ol>
+            <article class="contact-route-card" aria-live="polite">
+              <span class="contact-route-step" data-contact-route-step>Option 1 of 3</span>
+              <div class="contact-route-copy">
+                <strong data-contact-route-name>Instagram</strong>
+                <p data-contact-route-description>My preferred contact channel.</p>
+                <a class="contact-email-address" href="mailto:j.puentesb@hotmail.com" data-contact-email-address hidden>
+                  j.puentesb@hotmail.com
+                </a>
+              </div>
+              <a
+                class="button button-primary contact-route-action"
+                href="https://www.instagram.com/juanpuentesb/"
+                target="_blank"
+                rel="noopener noreferrer"
+                data-contact-action
+              >Copy &amp; open Instagram</a>
+            </article>
+            <div class="contact-route-navigation">
+              <button
+                class="button button-secondary"
+                type="button"
+                data-contact-previous
+                data-i18n="contactPrevious"
+                hidden
+              >Previous option</button>
+              <button
+                class="button button-secondary"
+                type="button"
+                data-contact-next
+              >Instagram unavailable? Try TikTok</button>
+            </div>
           </div>
         </div>
       </section>
