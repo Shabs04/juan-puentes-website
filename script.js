@@ -397,11 +397,9 @@
     }
 
     if (isEmail) {
-      const params = new URLSearchParams({
-        subject: translate("contactEmailSubject"),
-        body: contactMessage?.value.trim() || buildContactMessage(),
-      });
-      contactAction.href = `mailto:${publicContactEmail}?${params.toString()}`;
+      const subject = encodeURIComponent(translate("contactEmailSubject"));
+      const body = encodeURIComponent(contactMessage?.value.trim() || buildContactMessage());
+      contactAction.href = `mailto:${publicContactEmail}?subject=${subject}&body=${body}`;
       contactAction.removeAttribute("target");
       contactAction.removeAttribute("rel");
     } else {
