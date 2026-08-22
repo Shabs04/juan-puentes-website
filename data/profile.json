@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-08-21T14:22:34.221Z",
+  "lastUpdated": "2026-08-22T14:09:19.345Z",
   "etoro": {
     "displayName": "Juan Puentes Botero",
     "username": "Juanpuentesb",
@@ -18,10 +18,11 @@
   },
   "instagram": {
     "followers": "",
-    "posts": "",
     "aumDisplay": "$870k+ AUM",
     "socialProofDetail": "Updated from Juan's public Instagram profile metadata.",
-    "summary": "4,962 followers / 211 posts"
+    "summary": "4,962 followers / 211 posts",
+    "posts": "",
+    "error": "429 Too Many Requests"
   },
   "tiktok": {
     "following": "150",
