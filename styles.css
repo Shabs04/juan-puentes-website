@@ -484,6 +484,42 @@ h3 {
   color: #001705;
 }
 
+.profile-risk-note {
+  margin-top: 12px;
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--green-deep);
+  border-radius: var(--radius);
+  background: var(--surface);
+  padding: 12px 14px;
+}
+
+.profile-risk-copy,
+.profile-risk-original {
+  margin: 0;
+  color: var(--ink);
+  font-size: 0.82rem;
+  font-weight: 700;
+  line-height: 1.5;
+}
+
+.profile-risk-original {
+  margin-top: 9px;
+  border-top: 1px solid var(--line);
+  padding-top: 9px;
+}
+
+html[lang="en"] .profile-risk-original {
+  display: none;
+}
+
+.profile-risk-link {
+  display: inline-block;
+  margin-top: 9px;
+  color: var(--green-deep);
+  font-size: 0.82rem;
+  font-weight: 900;
+}
+
 .quick-stats {
   display: grid;
   grid-template-columns: repeat(3, 1fr);

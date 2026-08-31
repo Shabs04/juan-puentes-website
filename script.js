@@ -45,6 +45,9 @@
       verifiedProfile: "Verified profile",
       popularInvestor: "Popular Investor",
       profileStartInvesting: "Invest with me",
+      profileRiskDisclaimer:
+        "Copy Trading does not amount to investment advice. The value of your investments may go up or down. Your capital is at risk.",
+      profileRiskLearnMore: "Learn more about risk on eToro",
       statSince: "Since",
       statBase: "Base",
       statCopyFrom: "Copy from",
@@ -178,6 +181,9 @@
       verifiedProfile: "Perfil verificado",
       popularInvestor: "Inversionista Popular",
       profileStartInvesting: "Invierte conmigo",
+      profileRiskDisclaimer:
+        "El Copy Trading no constituye asesoramiento de inversión. El valor de tus inversiones puede subir o bajar. Tu capital está en riesgo.",
+      profileRiskLearnMore: "Más información sobre riesgos en eToro",
       statSince: "Desde",
       statBase: "Base",
       statCopyFrom: "Copiar desde",
